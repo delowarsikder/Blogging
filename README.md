@@ -22,3 +22,18 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+** Rack::Cors provides support for Cross-Origin Resource Sharing (CORS) for Rack compatible web applications.
+
+#initial set commad
+> rails new project name
+> rails s //run the project
+> rails g scaffold post title:string body:text
+//set up rake::cors https://github.com/cyu/rack-cors
+
+> bundle install // install gem 
+> rails db:migrate
+
+
+## Frontend Code 
+> npx create-react-app frontend --template redux-typescript
+
