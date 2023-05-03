@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
-  skip_before_action :verify_authenticity_token
+  skip_before_action :verify_authenticity_token  
+
   # GET /posts or /posts.json
   def index
     @posts = Post.all
@@ -51,7 +52,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
-      format.json { head :no_content }
+      format.json { render json: Post.all, status: :ok }
     end
   end
 
