@@ -37,3 +37,4 @@ Things you may want to cover:
 ## Frontend Code 
 > npx create-react-app frontend --template redux-typescript
 
+### References: https://youtu.be/ZGnMqKg-Cq4
