@@ -10,7 +10,6 @@ function Post(props: any) {
   const bodyElement = <p className='card-text text-start'>{body}</p>
   const dispatch = useDispatch<any>();
 
-
   return (
     <div className='border'>
       <div className='row'>

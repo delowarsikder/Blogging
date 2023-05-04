@@ -34,12 +34,14 @@ function PostForm() {
           name="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          // required
         />
 
         <textarea name="body"
           className='form-control text-start mt-2'
           value={body}
           onChange={(e) => setBody(e.target.value)}
+          // required
         />
 
         <button type='submit' className='button mt-2 '
