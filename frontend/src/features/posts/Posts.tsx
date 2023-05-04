@@ -3,6 +3,7 @@ import { Statuses, fetchPostsAsync, selectPosts, selectStatus } from './postSlic
 import { useAppSelector } from '../../app/hooks';
 import { useDispatch } from 'react-redux';
 import Post from './Post';
+import PostForm from './PostForm';
 
 function Posts() {
   const posts = useAppSelector(selectPosts);
@@ -16,7 +17,7 @@ function Posts() {
 
   let contents;
   if (status !== Statuses.UpToDate) {
-    contents = "blank";
+    contents = status;
   } else {
     contents = <div className='card'>
       <div className='card-body'>
@@ -36,6 +37,7 @@ function Posts() {
     <div>
       <h1>Posts</h1>
       {contents}
+      <PostForm />
     </div>
   )
 }
