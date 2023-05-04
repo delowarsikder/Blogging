@@ -74,6 +74,7 @@ export const fetchPostsAsync = createAsyncThunk(
     return response;
   }
 )
+
 export const destroyPostAsync = createAsyncThunk(
   'posts/destroyPost',
   async (payload: PostDeleteData) => {
