@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import produce from 'immer'
+import produce from 'immer';
 import { RootState } from '../../app/store';
-import { fetchPosts, createPost,editPost, destroyPost } from './postAPI';
+import { createPost, destroyPost, fetchPosts, updatePost } from './postAPI';
 
 export enum Statuses {
   Initial = "Not Fetch",
@@ -51,11 +51,11 @@ export interface PostDeleteData {
   }
 }
 
-export interface PostEditData {
+export interface PostUpdateData {
   post: {
     post_id: number;
-    post_title:string;
-    post_body:string;
+    post_title: string;
+    post_body: string;
   }
 }
 
@@ -64,23 +64,36 @@ export interface PostEditData {
 export const createPostAsync = createAsyncThunk(
   'posts/createPost',
   async (payload: PostFormData) => {
-    const response = await createPost(payload);
-    return response;
+
+    try {
+      const response = await createPost(payload);
+      console.log(response);
+      return response;
+    }
+    catch (e) {
+      console.log(e);
+    }
   }
 )
 
 export const fetchPostsAsync = createAsyncThunk(
   'posts/fetchPosts',
   async () => {
-    const response = await fetchPosts();
-    return response;
+    try {
+      const response = await fetchPosts();
+      return response;
+    }
+    catch (e) {
+      console.log(e);
+    }
+
   }
 )
 
-export const editPostAsync = createAsyncThunk(
-  'posts/editPost',
-  async (payload: PostEditData) => {
-    const response = await editPost(payload);
+export const updatePostAsync = createAsyncThunk(
+  'posts/updatePost',
+  async (payload: PostUpdateData) => {
+    const response = await updatePost(payload);
     return response;
   }
 )
