@@ -62,16 +62,29 @@ export interface PostUpdateData {
 export const createPostAsync = createAsyncThunk(
   'posts/createPost',
   async (payload: PostFormData) => {
-    const response = await createPost(payload);
-    return response;
+
+    try {
+      const response = await createPost(payload);
+      console.log(response);
+      return response;
+    }
+    catch (e) {
+      console.log(e);
+    }
   }
 )
 
 export const fetchPostsAsync = createAsyncThunk(
   'posts/fetchPosts',
   async () => {
-    const response = await fetchPosts();
-    return response;
+    try {
+      const response = await fetchPosts();
+      return response;
+    }
+    catch (e) {
+      console.log(e);
+    }
+
   }
 )
 

@@ -26,7 +26,10 @@ export async function createPost(payload: PostFormData) {
       post,
     }),
   })
-    .then(response => response.json())
+    .then(response => {
+      // console.log(JSON.stringify(response));
+      return response.json()
+    })
     .catch((error) => {
       console.log("Error: ", error);
       return {} as PostsState;

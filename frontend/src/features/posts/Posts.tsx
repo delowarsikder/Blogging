@@ -1,14 +1,23 @@
-import React, { useEffect } from 'react';
-import { Statuses, fetchPostsAsync, selectPosts, selectStatus } from './postSlice';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useAppSelector } from '../../app/hooks';
-import { useDispatch } from 'react-redux';
+import { closeModal, openModal } from '../modal/modalSlice';
 import Post from './Post';
+
+import PostFormPopUp from './PostFormPopUp';
+import { Statuses, fetchPostsAsync, selectPosts, selectStatus } from './postSlice';
 import PostForm from './PostForm';
 
 function Posts() {
+
+  const { isOpen } = useSelector((store: any) => store.modal);
   const posts = useAppSelector(selectPosts);
   const status = useAppSelector(selectStatus);
   const dispatch = useDispatch<any>();
+  const [postForm, setPostForm] = useState([{
+    title: '',
+    body: '',
+  }]);
 
   useEffect(() => {
     dispatch(fetchPostsAsync());
