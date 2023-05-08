@@ -12,26 +12,34 @@ function Post(props: any) {
 
 
   return (
-    <div className='border'>
-      <div className='row'>
-        <div className="col-8">
-          {titleElement}
-        </div>
-        <div className="col-4">
-          <ButtonGroup
-            post_id={props.post.id}
-            dispatch={props.dispatch}
-          />
-        </div>
+    <div>
+      <div className="d-flex p-2">
+        <div className='flex-grow-1'> Star asfasfddasflaskfjd;ljfl;adjflasjdfklsdfafasdfafafasdfdsdfasdfdfdsaft</div>
+        <div>End</div>
       </div>
-      <div className='row'>
-        <div className="col-8">
-          {bodyElement}
-        </div>
-        <div className="col-4">
 
+      <div>
+        <div className='row'>
+          <div className="col-8">
+            {titleElement}
+          </div>
+          <div className="col-4">
+            <ButtonGroup
+              post_id={props.post.id}
+              dispatch={props.dispatch}
+            />
+          </div>
+        </div>
+        <div className='row'>
+          <div className="col-8">
+            {bodyElement}
+          </div>
+          <div className="col-4">
+
+          </div>
         </div>
       </div>
+
     </div>
   )
 }

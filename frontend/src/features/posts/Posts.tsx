@@ -19,23 +19,26 @@ function Posts() {
   if (status !== Statuses.UpToDate) {
     contents = status;
   } else {
-    contents = <div className='card'>
-      <div className='card-body'>
+    contents = <div className='card mt-2'>
+      <div className='card-header text-center'>
+        <h1>Posts</h1>
       </div>
-      {posts && posts.length > 0 && posts.map(post => {
-        return <div key={post.id}>
-          <Post
-            dispatch={dispatch}
-            post={post}
-          />
-        </div>
-      })}
+      <div className='card-body'>
+        {posts && posts.length > 0 && posts.map(post => {
+          return <div key={post.id}>
+            <Post
+              dispatch={dispatch}
+              post={post}
+            />
+          </div>
+        })}
+      </div>
     </div>
   }
 
   return (
     <div>
-      <h1>Posts</h1>
+
       {contents}
       <PostForm />
     </div>
