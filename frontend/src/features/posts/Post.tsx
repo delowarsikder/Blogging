@@ -1,45 +1,31 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PostForm from './PostForm';
 import ButtonGroup from './ButtonGroup';
 import { useDispatch } from 'react-redux';
 
 function Post(props: any) {
-  const [title, setTitle] = useState(props.post.title);
-  const [body, setBody] = useState(props.post.body);
-  const titleElement = <h2 className='title text-start'>{title}</h2>
-  const bodyElement = <p className='card-text text-start'>{body}</p>
-  const dispatch = useDispatch<any>();
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
+  const titleElement = <h2 className='text-start'>{title}</h2>
+  const bodyElement = <p className='text-start'>{body}</p>
 
+  useEffect(() => {
+    setTitle(props.post.title);
+    setBody(props.post.body);
+  }, [props]);
 
   return (
     <div>
-      <div className="d-flex p-2">
-        <div className='flex-grow-1'> Star asfasfddasflaskfjd;ljfl;adjflasjdfklsdfafasdfafafasdfdsdfasdfdfdsaft</div>
-        <div>End</div>
-      </div>
-
-      <div>
-        <div className='row'>
-          <div className="col-8">
-            {titleElement}
-          </div>
-          <div className="col-4">
-            <ButtonGroup
-              post_id={props.post.id}
-              dispatch={props.dispatch}
-            />
-          </div>
-        </div>
-        <div className='row'>
-          <div className="col-8">
-            {bodyElement}
-          </div>
-          <div className="col-4">
-
-          </div>
+      <div className="d-flex align-items-start flex-column mb-2">
+        <div className="">{titleElement}</div>
+        <div className="">{bodyElement}</div>
+        <div>
+          <ButtonGroup
+            post={props.post}
+            dispatch={props.dispatch}
+          />
         </div>
       </div>
-
     </div>
   )
 }

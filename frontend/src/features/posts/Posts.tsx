@@ -38,8 +38,7 @@ function Posts() {
 
   return (
     <div>
-
-      {contents}
+      {(posts && posts.length > 0) ? contents : "You have no Posts yet...!"}
       <PostForm />
     </div>
   )
