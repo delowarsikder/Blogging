@@ -1,4 +1,4 @@
-import { PostsState, PostFormData,PostDeleteData } from "./postSlice";
+import { PostsState, PostFormData, PostDeleteData, PostUpdateData } from "./postSlice";
 const API_URL = "http://127.0.0.1:3000";
 
 export async function fetchPosts() {
@@ -50,6 +50,25 @@ export async function destroyPost(payload: PostDeleteData) {
       return {} as PostsState;
     });
 }
+
+export async function updatePost(payload: PostUpdateData) {
+  const post = payload.post;
+  return fetch(`${API_URL}/posts/${post.post_id}.json`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      post,
+    }),
+  })
+    .then(response => response.json())
+    .catch((error) => {
+      console.log("Error: ", error);
+      return {} as PostsState;
+    });
+}
+
 
 
 
