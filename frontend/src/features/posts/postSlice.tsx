@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import produce from 'immer'
+import produce from 'immer';
 import { RootState } from '../../app/store';
-import { fetchPosts, createPost, destroyPost, updatePost } from './postAPI';
+import { createPost, destroyPost, fetchPosts, updatePost } from './postAPI';
 
 export enum Statuses {
   Initial = "Not Fetch",
@@ -54,7 +54,7 @@ export interface PostUpdateData {
   post: {
     post_id: number;
     title: string;
-    body: Body;
+    body: string;
   }
 }
 
@@ -95,8 +95,7 @@ export const updatePostAsync = createAsyncThunk(
 export const postSlice = createSlice({
   name: "posts",
   initialState,
-  /*
-  Synchronous action */
+  /*Synchronous action */
   reducers: {},
 
   extraReducers: (builder) => {
@@ -154,7 +153,6 @@ export const postSlice = createSlice({
         })
       })
       //update post
-
       .addCase(updatePostAsync.pending, (state) => {
         return produce(state, (draftState) => {
           draftState.status = Statuses.Loading;
@@ -162,10 +160,12 @@ export const postSlice = createSlice({
       })
       .addCase(updatePostAsync.fulfilled, (state, action) => {
         return produce(state, (draftState) => {
+          // draftState.posts = [{post1_object},{post2_object}]
+          // find index and update data of that draftState.posts[index] with action.payload
           const index = draftState.posts.findIndex(
             post => post.id === action.payload.id
           );
-          draftState.posts = action.payload;
+          draftState.posts[index] = action.payload;
           draftState.status = Statuses.UpToDate;
         })
       })

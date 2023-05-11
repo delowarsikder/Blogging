@@ -1,47 +1,77 @@
-import React, { useState } from "react";
-import { useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useLocation, useNavigate } from 'react-router-dom'
+import { updatePostAsync } from "./postSlice";
 
 function PostEdit() {
+  const dispatch = useDispatch<any>();
+  const navigator = useNavigate();
+  const { post } = useLocation().state;
   const [editTitle, setEditTitle] = useState("");
-  const [editbody, setEditBody] = useState("");
-  const location = useLocation();
-  let { props } = location.state;
+  const [editBody, setEditBody] = useState("");
 
   const updateHandler = (e: any) => {
     e.preventDefault();
     const formData = {
       post: {
-        id: props.post.id,
+        post_id: post.id,
         title: editTitle,
-        body: editableBody,
+        body: editBody,
       }
     }
+    dispatch(updatePostAsync(formData));
+    backToPosts();
   }
 
-  const editableTitle = <input
-    type="text"
-    className="form-control text-start"
-    value={editTitle}
-    onChange={(e) => setEditTitle(e.target.value)}
-  />
+  useEffect(() => {
+    setEditTitle(post.title);
+    setEditBody(post.body);
+  }, [post]);
 
-  const editableBody = <input
-    type="text"
-    className="form-control text-start"
-    value={editbody}
-    onChange={(e) => setEditBody(e.target.value)}
-  />
-  const updateButton = <button
-    type="button" className="form-control btn btn-success"
-    onClick={(e) => updateHandler(e)}>Update</button>
+
+  const backToPosts = (() => {
+    navigator('/');
+  });
+
 
   return (
-    <div>
-      <div>PostEdit</div>
-      {editableTitle}
-      {editableBody}
+    <div className='card mt-2'>
+      <h1 className='card-header'>Post Form</h1>
+      {post.id}
+      <div className='card-body'>
+        <form>
+          <input
+            required
+            className='form-control text-start mt-2'
+            type="text"
+            name="title"
+            value={editTitle}
+            onChange={(e) => setEditTitle(e.target.value)}
+          />
+          <textarea
+            required
+            name="body"
+            className="form-control text-start mt-2"
+            value={editBody}
+            onChange={(e) => setEditBody(e.target.value)}
+          />
+        </form>
+        <div className='card-footer'>
+          <button type="button"
+            className="btn btn-warning m-1"
+            onClick={(e) => backToPosts()}>
+            Cancel</button>
+
+          <button
+            type="button" className="btn btn-success m-1"
+            onClick={(e) => updateHandler(e)}>Update</button>
+        </div>
+
+      </div>
     </div>
-  );
+  )
+
+
 }
 
 
