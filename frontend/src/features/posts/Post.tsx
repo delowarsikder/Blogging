@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import PostForm from './PostForm';
 import ButtonGroup from './ButtonGroup';
 
 function Post(props: any) {
@@ -18,7 +17,6 @@ function Post(props: any) {
   return (
     <div>
       <div className="d-flex align-items-start flex-column mb-2">
-        <p className=''>{postId}</p>
         <div className="">{titleElement}</div>
         <div className="">{bodyElement}</div>
         <div>

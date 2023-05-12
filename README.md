@@ -1,4 +1,4 @@
-# README
+b# README
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
@@ -24,13 +24,13 @@ Things you may want to cover:
 * ...
 ** Rack::Cors provides support for Cross-Origin Resource Sharing (CORS) for Rack compatible web applications.
 
-#initial set commad
-> rails new project name
-> rails s //run the project
+## initial set commad
+> rails new project_name <br/>
+> rails s //run the project  <br/>
 > rails g scaffold post title:string body:text
 //set up rake::cors https://github.com/cyu/rack-cors
 
-> bundle install // install gem 
+> bundle install // install gem  <br/>
 > rails db:migrate
 
 

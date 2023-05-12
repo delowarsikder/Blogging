@@ -44,3 +44,19 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## Install Fontawesome Icon
+> ` npm i --save @fortawesome/fontawesome-svg-core ` <br/>
+> ` npm install --save @fortawesome/free-solid-svg-icons` <br/>
+> ` npm install --save @fortawesome/react-fontawesome `
+
+### Clean node install
+> `rm -rf node_modules `<br/>
+> `rm -f package-lock.json ` <br/>
+> `npm cache clean --force` <br/>
+> `npm install`
+
+### ESlint Configuration
+>[Process-1](https://dev.to/eshankvaish/set-up-eslint-and-prettier-in-a-react-typescript-app-2022-29c9)
+[Process-2](https://levelup.gitconnected.com/full-guide-add-eslint-to-react-typescript-project-406618192b9)
+[Process-3](https://andrebnassis.medium.com/setting-eslint-on-a-react-typescript-project-2021-1190a43ffba)

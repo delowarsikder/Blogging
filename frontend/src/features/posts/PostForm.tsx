@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { createPostAsync } from './postSlice';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function PostForm() {
   const dispatch = useDispatch<any>();
@@ -48,10 +49,12 @@ function PostForm() {
         <div className='card-footer'>
           <button type='button' className='btn m-1 btn-warning'
             onClick={() => resetState()}>
+            <FontAwesomeIcon icon="xmark" />
             Cancel
           </button>
           <button type='button' className='btn m-1 btn-success'
             onClick={(e) => submitHandler(e)}>
+            <FontAwesomeIcon icon="paper-plane" />
             Submit
           </button>
         </div>
