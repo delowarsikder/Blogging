@@ -2,13 +2,14 @@ import { destroyPostAsync } from "./postSlice";
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { openModal } from '../modal/modalSlice';
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
 
 
 function ButtonGroup(props: any) {
   const navigator = useNavigate();
   const { post, dispatch } = props;
-
   const handleDelete = (e: any) => {
     e.preventDefault();
     const payload = {
@@ -20,7 +21,10 @@ function ButtonGroup(props: any) {
   }
 
   function handleEdit(e: any) {
-    navigator('./PostEdit', { state: { post } });
+    dispatch(openModal());
+
+    // navigator('./PostEdit', { state: { post } });
+    // navigator('./newform', { state: { post } });
   }
 
   return (

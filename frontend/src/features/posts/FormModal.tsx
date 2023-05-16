@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../../features/modal/modalSlice';
+import { closeModal } from '../modal/modalSlice';
 import { createPostAsync } from './postSlice';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-
-function PostFormPopUp(formData: any) {
+function FormModal(formData: any) {
   const { isOpen } = useSelector((store: any) => store.modal);
 
   const dispatch = useDispatch<any>();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
 
-  function submitHandler(e: any) {
+  const submitHandler = (e: any) => {
     e.preventDefault();
     const formData = {
       post: {
@@ -28,6 +28,7 @@ function PostFormPopUp(formData: any) {
     setTitle('');
     setBody('');
   }
+  let formTitle="Your Idea";
 
   useEffect(() => {
     setTitle(formData.title);
@@ -39,10 +40,10 @@ function PostFormPopUp(formData: any) {
     <div className='modal' style={{
       display: isOpen ? 'block' : 'none'
     }}>
-      <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title" id="staticBackdropLabel">Post Form Pop Up</h5>
+            <h5 className="modal-title" id="staticBackdropLabel">{formTitle}</h5>
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => {
               dispatch(closeModal());
             }}></button>
@@ -70,26 +71,26 @@ function PostFormPopUp(formData: any) {
           </div>
 
           <div className="modal-footer">
-            <button type='button' className='btn btn-primary mt-2 '
-              onClick={(e) => submitHandler(e)}>
-              Submit
-            </button>
-
-            <button
-              type='button'
-              className='btn clear-btn'
+            <button type='button' className='btn m-1 btn-warning'
               onClick={() => {
                 dispatch(closeModal());
               }}>
-              cancel
+              <FontAwesomeIcon icon="xmark" />
+              Cancel
+            </button>
+
+            <button type='button' className='btn m-1 btn-success'
+              onClick={(e) => submitHandler(e)}>
+              <FontAwesomeIcon icon="paper-plane" />
+              Submit
             </button>
           </div>
+
         </div>
       </div>
-    </div>
-
+    </div >
   )
 }
 
-export default PostFormPopUp;
+export default FormModal;
 

@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons'
+import NewForm from './features/posts/NewForm';
+import BlackPage from './components/blankPage';
 
 library.add(fab, fas)
 
@@ -17,6 +19,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Posts />} />
           <Route path='/postedit' element={<PostEdit />} />
+          <Route path='/newform' element={<NewForm />} />
+          <Route path='/blankpage' element={<BlackPage />} />
         </Routes>
       </Router>
     </div>

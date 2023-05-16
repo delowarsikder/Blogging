@@ -37,7 +37,7 @@ function PostEdit() {
   return (
     <div className='card mt-2'>
       <h1 className='card-header'>Post Form</h1>
-      {post.id}
+      {/* {post.id} */}
       <div className='card-body'>
         <form>
           <input

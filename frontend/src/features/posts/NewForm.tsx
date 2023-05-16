@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { createPostAsync } from './postSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Navigate } from 'react-router-dom';
 
-function PostForm() {
+function NewForm() {
   const dispatch = useDispatch<any>();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
@@ -27,11 +28,11 @@ function PostForm() {
 
   return (
     <div className='card mt-2'>
-      <h1 className='card-header'>Post Form</h1>
+      <h1 className='card-header'>New Post</h1>
       <div className='card-body'>
         <form>
           <input
-            placeholder='Enter Post Title...'
+            placeholder='  Title...'
             className='form-control text-start mt-2'
             type="text"
             name="title"
@@ -40,8 +41,9 @@ function PostForm() {
           />
           <textarea name="body"
             required
-            placeholder='Enter Post Body...'
+            placeholder='Description...'
             className='form-control text-start mt-2'
+            rows={5} 
             value={body}
             onChange={(e) => setBody(e.target.value)}
           />
@@ -64,5 +66,5 @@ function PostForm() {
   )
 }
 
-export default PostForm;
+export default NewForm;
 
