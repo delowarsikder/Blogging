@@ -32,7 +32,7 @@ function NewForm() {
       <div className='card-body'>
         <form>
           <input
-            placeholder='  Title...'
+            placeholder='Title...'
             className='form-control text-start mt-2'
             type="text"
             name="title"

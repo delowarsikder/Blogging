@@ -8,6 +8,8 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import NewForm from './features/posts/NewForm';
 import BlackPage from './components/blankPage';
+import ModalSlice from './features/modal/modalSlice';
+import FormModal from './features/posts/FormModal';
 
 library.add(fab, fas)
 

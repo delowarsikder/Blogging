@@ -14,7 +14,7 @@ function PostEdit() {
     e.preventDefault();
     const formData = {
       post: {
-        post_id: post.id,
+        id: post.id,
         title: editTitle,
         body: editBody,
       }

@@ -27,11 +27,11 @@ export interface PostsState {
 const initialState: PostsState = {
   posts: [
     {
-      id: 0,
+      id: undefined,
       title: "",
       body: "",
-      created_at: "",
-      updated_at: "",
+      created_at: null,
+      updated_at: null,
     }
   ],
   status: Statuses.Initial
@@ -47,12 +47,12 @@ export interface PostFormData {
 
 export interface PostDeleteData {
   post: {
-    post_id: number;
+    id: number;
   }
 }
 export interface PostUpdateData {
   post: {
-    post_id: number;
+    id: number | undefined;
     title: string;
     body: string;
   }

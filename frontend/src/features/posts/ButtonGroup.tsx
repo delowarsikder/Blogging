@@ -1,30 +1,29 @@
-import { destroyPostAsync } from "./postSlice";
-import { useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import { openModal } from '../modal/modalSlice';
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch } from "react-redux";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
+import { openModal } from '../modal/modalSlice';
+import { destroyPostAsync } from "./postSlice";
 
 function ButtonGroup(props: any) {
   const navigator = useNavigate();
   const { post, dispatch } = props;
+  const { isOpen } = useSelector((store: any) => store.modal);
+
   const handleDelete = (e: any) => {
     e.preventDefault();
     const payload = {
       post: {
-        post_id: post.id
+        id: post.id
       }
     }
     dispatch(destroyPostAsync(payload));
   }
 
-  function handleEdit(e: any) {
-    dispatch(openModal());
-
-    // navigator('./PostEdit', { state: { post } });
-    // navigator('./newform', { state: { post } });
+  const handleEdit = (e: any) => {
+    e.preventDefault();
+    dispatch(openModal(post));
+    // navigator('./postedit', { state: { post } });
   }
 
   return (
