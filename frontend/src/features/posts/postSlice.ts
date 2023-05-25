@@ -27,11 +27,11 @@ export interface PostsState {
 const initialState: PostsState = {
   posts: [
     {
-      id: 0,
+      id: undefined,
       title: "",
       body: "",
-      created_at: "",
-      updated_at: "",
+      created_at: null,
+      updated_at: null,
     }
   ],
   status: Statuses.Initial
@@ -47,12 +47,12 @@ export interface PostFormData {
 
 export interface PostDeleteData {
   post: {
-    post_id: number;
+    id: number;
   }
 }
 export interface PostUpdateData {
   post: {
-    post_id: number;
+    id: number | undefined;
     title: string;
     body: string;
   }
@@ -62,18 +62,32 @@ export interface PostUpdateData {
 export const createPostAsync = createAsyncThunk(
   'posts/createPost',
   async (payload: PostFormData) => {
-    const response = await createPost(payload);
-    return response;
+
+    try {
+      const response = await createPost(payload);
+      console.log(response);
+      return response;
+    }
+    catch (e) {
+      console.log(e);
+    }
   }
 )
 
 export const fetchPostsAsync = createAsyncThunk(
   'posts/fetchPosts',
   async () => {
-    const response = await fetchPosts();
-    return response;
+    try {
+      const response = await fetchPosts();
+      return response;
+    }
+    catch (e) {
+      console.log(e);
+    }
+
   }
 )
+
 export const destroyPostAsync = createAsyncThunk(
   'posts/destroyPost',
   async (payload: PostDeleteData) => {

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import PostForm from './PostForm';
 import ButtonGroup from './ButtonGroup';
+import FormModal from './FormModal';
 
 function Post(props: any) {
-  const [postId,setPostId]=useState(null);
+  const [postId, setPostId] = useState(null);
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
-  const titleElement = <h2 className='text-start'>{title}</h2>
-  const bodyElement = <p className='text-start'>{body}</p>
+  const titleElement = <h2 >{title}</h2>
+  const bodyElement = <p >{body}</p>
 
   useEffect(() => {
     setPostId(props.post.id);
@@ -18,9 +18,9 @@ function Post(props: any) {
   return (
     <div>
       <div className="d-flex align-items-start flex-column mb-2">
-        <p className=''>{postId}</p>
-        <div className="">{titleElement}</div>
-        <div className="">{bodyElement}</div>
+        <div className='text-start'>{postId}</div>
+        <div className='text-start'>{titleElement}</div>
+        <div className='text-start'>{bodyElement}</div>
         <div>
           <ButtonGroup
             post={props.post}
