@@ -22,8 +22,8 @@ function ButtonGroup(props: any) {
 
   const handleEdit = (e: any) => {
     e.preventDefault();
-    dispatch(openModal(post));
-    // navigator('./postedit', { state: { post } });
+    // dispatch(openModal(post));
+    navigator('./postedit', { state: { post } });
   }
 
   return (

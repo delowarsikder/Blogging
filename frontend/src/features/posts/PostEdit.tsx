@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from 'react-router-dom'
 import { updatePostAsync } from "./postSlice";
+import { redirectTo } from "../../components/Utils";
 
 function PostEdit() {
   const dispatch = useDispatch<any>();
@@ -30,7 +31,7 @@ function PostEdit() {
 
 
   const backToPosts = (() => {
-    navigator('/');
+    //  redirectTo('/');
   });
 
 

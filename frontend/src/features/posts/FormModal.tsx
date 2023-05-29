@@ -39,7 +39,6 @@ function FormModal(props: any) {
   }
   let formTitle = "Your Idea";
 
-  // if (props) {
   useEffect(() => {
     if (data?.payload) {
       setTitle(data.payload.title);
@@ -47,7 +46,6 @@ function FormModal(props: any) {
       setId(data.payload.id);
     }
   }, [data])
-  // }
 
   return (
     <div>

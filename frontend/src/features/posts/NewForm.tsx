@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { createPostAsync } from './postSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Navigate } from 'react-router-dom';
+import { redirectTo } from '../../components/Utils';
 
 function NewForm() {
   const dispatch = useDispatch<any>();
@@ -43,7 +44,7 @@ function NewForm() {
             required
             placeholder='Description...'
             className='form-control text-start mt-2'
-            rows={5} 
+            rows={5}
             value={body}
             onChange={(e) => setBody(e.target.value)}
           />
