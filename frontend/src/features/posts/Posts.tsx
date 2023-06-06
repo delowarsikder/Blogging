@@ -26,8 +26,8 @@ function Posts(props: any) {
 
   const createNewPost = (e: any) => {
     // justAnAlert("click the new button");
-    navigator('./newform');
-    // dispatch(openModal());
+    // navigator('./newform');
+    dispatch(openModal());
   }
 
   let contents = null;
