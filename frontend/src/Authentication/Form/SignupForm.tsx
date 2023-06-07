@@ -45,8 +45,8 @@ const SignupForm = ({ setAuth }: any) => {
     password: yup.string()
       .min(8, "Password must have at least 8 characters")
       .required("Password is required")
-      // .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/, "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"),
-    ,confirmPassword: yup
+    // .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/, "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"),
+    , confirmPassword: yup
       .string()
       .required("Please re-type your password")
       .oneOf([yup.ref("password")], "Passwords does not match"),
@@ -74,118 +74,135 @@ const SignupForm = ({ setAuth }: any) => {
   return (
     <FormikProvider value={formik}>
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
-        <Stack spacing={2}>
-          <Stack
-            component={motion.div}
-            initial={{ opacity: 0, y: 60 }}
-            animate={animate}
-            direction={{ xs: "column", sm: "row" }}
-            spacing={2}
-          >
-            <TextField
-              fullWidth
-              label="First name"
-              {...getFieldProps("firstName")}
-              error={Boolean(touched.firstName && errors.firstName)}
-              helperText={touched.firstName && errors.firstName}
-            />
+        <Box
+          component={motion.div}
+          animate={{
+            transition: {
+              staggerChildren: 0.55,
+            },
+          }}
+        >
 
-            <TextField
-              fullWidth
-              label="Last name"
-              {...getFieldProps("lastName")}
-              error={Boolean(touched.lastName && errors.lastName)}
-              helperText={touched.lastName && errors.lastName}
-            />
-          </Stack>
 
           <Stack
-            spacing={3}
+            spacing={1}
             component={motion.div}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 25 }}
             animate={animate}
           >
-            <TextField
-              fullWidth
-              autoComplete="username"
-              type="email"
-              label="Email address"
-              {...getFieldProps("email")}
-              error={Boolean(touched.email && errors.email)}
-              helperText={touched.email && errors.email}
-            />
 
-            <TextField
-              fullWidth
-              autoComplete="current-password"
-              type={showPassword ? "text" : "password"}
-              label="Password"
-              {...getFieldProps("password")}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      edge="end"
-                      onClick={() => setShowPassword((prev) => !prev)}
-                    >
-                      <Icon
-                        icon={
-                          showPassword ? "eva:eye-fill" : "eva:eye-off-fill"
-                        }
-                      />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              error={Boolean(touched.password && errors.password)}
-              helperText={touched.password && errors.password}
-            />
-
-
-            <TextField
-              fullWidth
-              autoComplete="current-password"
-              type={showPassword ? "text" : "password"}
-              label="ConfirmPassword"
-              {...getFieldProps("confirmPassword")}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      edge="end"
-                      onClick={(e) => setShowConfirmPassword((e) => !e)}
-                    >
-                      <Icon
-                        icon={
-                          showConfirmPassword ? "eva:eye-fill" : "eva:eye-off-fill"
-                        }
-                      />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              error={Boolean(touched.confirmPassword && errors.confirmPassword)}
-              helperText={touched.confirmPassword && errors.confirmPassword}
-            />
-
-          </Stack>
-
-          <Box
-            component={motion.div}
-            initial={{ opacity: 0, y: 20 }}
-            animate={animate}
-          >
-            <LoadingButton
-              fullWidth
-              size="large"
-              type="submit"
-              variant="contained"
-              loading={isSubmitting}
+            <Stack
+              component={motion.div}
+              initial={{ opacity: 0, y: 30 }}
+              animate={animate}
+              direction={{ xs: "column", sm: "row" }}
+              spacing={1}
             >
-              Sign up
-            </LoadingButton>
-          </Box>
-        </Stack>
+              <TextField
+                fullWidth
+                label="First name"
+                {...getFieldProps("firstName")}
+                error={Boolean(touched.firstName && errors.firstName)}
+                helperText={touched.firstName && errors.firstName}
+              />
+
+              <TextField
+                fullWidth
+                label="Last name"
+                {...getFieldProps("lastName")}
+                error={Boolean(touched.lastName && errors.lastName)}
+                helperText={touched.lastName && errors.lastName}
+              />
+            </Stack>
+
+            <Stack
+              spacing={1}
+              component={motion.div}
+              initial={{ opacity: 0, y: 25 }}
+              animate={animate}
+            >
+              <TextField
+                fullWidth
+                autoComplete="username"
+                type="email"
+                label="Email address"
+                {...getFieldProps("email")}
+                error={Boolean(touched.email && errors.email)}
+                helperText={touched.email && errors.email}
+              />
+
+              <TextField
+                fullWidth
+                autoComplete="current-password"
+                type={showPassword ? "text" : "password"}
+                label="Password"
+                {...getFieldProps("password")}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        edge="end"
+                        onClick={() => setShowPassword((prev) => !prev)}
+                      >
+                        <Icon
+                          icon={
+                            showPassword ? "eva:eye-fill" : "eva:eye-off-fill"
+                          }
+                        />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+                error={Boolean(touched.password && errors.password)}
+                helperText={touched.password && errors.password}
+              />
+
+
+              <TextField
+                fullWidth
+                autoComplete="current-password"
+                type={showConfirmPassword ? "text" : "password"}
+                label="ConfirmPassword"
+                {...getFieldProps("confirmPassword")}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        edge="end"
+                        onClick={(e) => setShowConfirmPassword((e) => !e)}
+                      >
+                        <Icon
+                          icon={
+                            showConfirmPassword ? "eva:eye-fill" : "eva:eye-off-fill"
+                          }
+                        />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+                error={Boolean(touched.confirmPassword && errors.confirmPassword)}
+                helperText={touched.confirmPassword && errors.confirmPassword}
+              />
+
+            </Stack>
+
+            <Box
+              component={motion.div}
+              initial={{ opacity: 0, y: 20 }}
+              animate={animate}
+            >
+              <LoadingButton
+                fullWidth
+                size="large"
+                type="submit"
+                variant="contained"
+                loading={isSubmitting}
+              >
+                Sign up
+              </LoadingButton>
+            </Box>
+          </Stack>
+        </Box>
       </Form>
     </FormikProvider>
   );

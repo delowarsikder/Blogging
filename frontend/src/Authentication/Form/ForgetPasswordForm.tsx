@@ -28,7 +28,7 @@ const animate = {
   },
 };
 
-const SigninForm = ({ setAuth }: any) => {
+const ForgetPasswordForm = ({ setAuth }: any) => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -45,15 +45,12 @@ const SigninForm = ({ setAuth }: any) => {
   const formik = useFormik({
     initialValues: {
       email: "",
-      password: "",
       remember: false,
     },
     validationSchema: SigninSchema,
     onSubmit: (value) => {
       console.log("submitting...", value);
       console.log('email: ', value.email);
-      console.log('password: ', value.password);
-      console.log('remember: ', value.remember);
       //call api to check the user login info then if valid
 
       setTimeout(() => {
@@ -80,11 +77,11 @@ const SigninForm = ({ setAuth }: any) => {
           <Box
             sx={{
               display: "flex",
-              flexDirection: "column",
+              flexDirection: "row",
               gap: 3,
             }}
             component={motion.div}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={animate}
           >
             <TextField
@@ -97,63 +94,14 @@ const SigninForm = ({ setAuth }: any) => {
               helperText={touched.email && errors.email}
             />
 
-            <TextField
-              fullWidth
-              autoComplete="current-password"
-              type={showPassword ? "text" : "password"}
-              label="Password"
-              {...getFieldProps("password")}
-              error={Boolean(touched.password && errors.password)}
-              helperText={touched.password && errors.password}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      onClick={() => setShowPassword((prev) => !prev)}
-                    >
-                      {showPassword ? (
-                        <Icon icon="eva:eye-fill" />
-                      ) : (
-                        <Icon icon="eva:eye-off-fill" />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
           </Box>
 
-          <Box
-            component={motion.div}
-            initial={{ opacity: 0, y: 20 }}
-            animate={animate}
+          <Stack
+            direction="column"
+            alignItems="center"
+            justifyContent="space-between"
+            sx={{ my: 2 }}
           >
-            <Stack
-              direction="row"
-              alignItems="center"
-              justifyContent="space-between"
-              sx={{ my: 2 }}
-            >
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    {...getFieldProps("remember")}
-                    checked={values.remember}
-                  />
-                }
-                label="Remember me"
-              />
-
-              <Link
-                component={RouterLink}
-                variant="subtitle2"
-                to="/forget-password"
-                underline="hover"
-              >
-                Forgot password?
-              </Link>
-            </Stack>
-
             <LoadingButton
               fullWidth
               size="large"
@@ -161,13 +109,16 @@ const SigninForm = ({ setAuth }: any) => {
               variant="contained"
               loading={isSubmitting}
             >
-              {isSubmitting ? "loading..." : "Login"}
+              {isSubmitting ? "loading..." : "Reset Password"}
             </LoadingButton>
-          </Box>
+          </Stack>
+
         </Box>
       </Form>
     </FormikProvider>
   );
 };
 
-export default SigninForm;
+export default ForgetPasswordForm;
+
+

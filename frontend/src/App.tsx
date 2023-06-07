@@ -15,8 +15,11 @@ import Error from './pages/error';
 import { useState } from 'react';
 import Signin from './Authentication/Signin';
 import Signup from './Authentication/Signup';
+
+
 import { openModal, closeModal } from './features/modal/modalSlice';
 import { useDispatch } from 'react-redux';
+import ForgetPassword from './Authentication/ForgetPassword';
 library.add(fab, fas)
 
 function App() {
@@ -30,6 +33,9 @@ function App() {
         <Route path='*' element={<Navigate to='/error' replace />} />
         <Route path='/signin' element={<Signin setAuth={setAuth} />} />
         <Route path='/signup' element={<Signup setAuth={setAuth} />} />
+
+        <Route path='/forget-password' element={<ForgetPassword/>}/>
+        
 
         {/* <Route path='/login' element={<Login />} /> */}
         {/* <Route path='/registration' element={<Registration />} /> */}

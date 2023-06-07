@@ -55,14 +55,14 @@ const Signup = ({ setAuth }: any) => {
           <HeadingStyle component={motion.div} {...fadeInUp}>
             <Logo />
 
-            <Typography sx={{ color: "text.secondary", mb: 5 }}>
+            <Typography sx={{ color: "text.secondary", mb: 1 }}>
               Enter your details below.
             </Typography>
           </HeadingStyle>
 
           <SignupForm setAuth={setAuth} />
 
-          <Divider sx={{ my: 3 }} component={motion.div} {...fadeInUp}>
+          <Divider sx={{ my: 1 }} component={motion.div} {...fadeInUp}>
             <Typography variant="body2" sx={{ color: "text.secondary" }}>
               OR
             </Typography>

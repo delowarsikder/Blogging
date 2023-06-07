@@ -7,8 +7,8 @@ import { motion } from "framer-motion";
 
 
 import SocialAuth from "./SocialIcon/SocialAuth";
-import SigninForm from "./Form/SigninForm";
 import Logo from "../components/Logo";
+import ForgetPasswordForm from "./Form/ForgetPasswordForm";
 
 let easing = [0.6, -0.05, 0.01, 0.99];
 const fadeInUp = {
@@ -27,12 +27,14 @@ const fadeInUp = {
   },
 };
 
-export default function Signin({ setAuth }: any) {
+export default function ForgetPassword() {
   return (
-    <Container component="main" maxWidth="sm"> 
+    <Container component="main" maxWidth="sm">
+
+
       <Logo />
       <Typography component="h1" variant="h5">
-        Login to share your feelings
+        Forget Password
       </Typography>
       <Box
         sx={{
@@ -46,24 +48,18 @@ export default function Signin({ setAuth }: any) {
           alignItems: "center",
         }}
       >
-        <SigninForm setAuth={setAuth} />
-        <Link to="/signup" >
-          {"Don't have an account? Sign Up"}
+        <Typography component="h6">
+          You will receive a link to create a new password via email.
+        </Typography>
+        <ForgetPasswordForm />
+
+        <Link to="/signin" >
+          {"Remember your password?"}
         </Link>
-
-        <Divider sx={{ my: 2 }} component={motion.div} {...fadeInUp}>
-          <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            OR
-          </Typography>
-        </Divider>
-
-        <Box component={motion.div} {...fadeInUp}>
-          <Typography component="h6" variant="h6">
-            or sign up with:
-          </Typography>
-          <SocialAuth />
-        </Box>
       </Box>
     </Container>
   );
-} 
+}
+
+
+
