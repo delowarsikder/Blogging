@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: MyString
+  current_sign_in_at: 2023-06-15 18:21:45
+  last_sign_in_at: 2023-06-15 18:21:45
+  user_active_status: false
+  wrong_login_attemp: 1
+
+two:
+  user_id: MyString
+  current_sign_in_at: 2023-06-15 18:21:45
+  last_sign_in_at: 2023-06-15 18:21:45
+  user_active_status: false
+  wrong_login_attemp: 1
