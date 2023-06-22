@@ -57,3 +57,9 @@ then apply this command
 * gem 'dotenv-rails'
 * gem 'mysql2'
 
+rails generate model User first_name:string last_name:string user_name:string email:string password:string reset_password_token:string reset_password_sent_at:timestamp  active_status:boolean image:string
+
+rails g model AuthToken user_id:string activation_token:string token_expire_time:timestamp resend_token_time:timestamp 
+
+rails generate model UserInfo user_id:string current_sign_in_at:timestamp last_sign_in_at:timestamp user_active_status:boolean wrong_login_attemp:integer 
+
