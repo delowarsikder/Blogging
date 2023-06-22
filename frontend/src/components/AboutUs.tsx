@@ -1,5 +1,5 @@
 import React from 'react'
- function aboutUs(props:any){
+ function AboutUs(props:any){
   return (
     <div>
       <h1>About Us {props.props}</h1>
@@ -7,4 +7,4 @@ import React from 'react'
   )
 }
 
-export default aboutUs;
+export default AboutUs;

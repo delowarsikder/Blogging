@@ -1,13 +1,8 @@
-import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
-import { useState } from "react";
+import { Box, Container, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import { Button, Checkbox, Container, Typography, Box, Divider } from "@mui/material";
-import { motion } from "framer-motion";
 
 
-import SocialAuth from "./SocialIcon/SocialAuth";
-import Logo from "../components/Logo";
+import Logo from "../../components/Logo";
 import ForgetPasswordForm from "./Form/ForgetPasswordForm";
 
 let easing = [0.6, -0.05, 0.01, 0.99];

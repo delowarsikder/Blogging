@@ -1,14 +1,11 @@
-import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Button, Checkbox, Container, Typography, Box, Divider } from "@mui/material";
+import { Box, Container, Divider, Typography } from "@mui/material";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 
-import SocialAuth from "./SocialIcon/SocialAuth";
+import Logo from "../../components/Logo";
 import SigninForm from "./Form/SigninForm";
-import Logo from "../components/Logo";
+import SocialAuth from "./SocialIcon/SocialAuth";
 
 let easing = [0.6, -0.05, 0.01, 0.99];
 const fadeInUp = {
@@ -29,7 +26,7 @@ const fadeInUp = {
 
 export default function Signin({ setAuth }: any) {
   return (
-    <Container component="main" maxWidth="sm"> 
+    <Container component="main" maxWidth="sm">
       <Logo />
       <Typography component="h1" variant="h5">
         Login to share your feelings

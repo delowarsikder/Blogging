@@ -1,16 +1,13 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useAppSelector } from '../../app/hooks';
-import { NavLink, Navigate, useNavigate } from "react-router-dom";
-import Post from './Post';
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate, useNavigate } from "react-router-dom";
+import { useAppSelector } from '../../app/hooks';
 import { openModal } from '../modal/modalSlice';
-import NewForm from './NewForm';
-import { Statuses, fetchPostsAsync, selectPosts, selectStatus } from './postSlice';
 import FormModal from './FormModal';
-import { justAnAlert } from '../../components/Utils';
-import AboutUs from '../../components/aboutUs';
+import Post from './Post';
+import { Statuses, fetchPostsAsync, selectPosts, selectStatus } from './postSlice';
 
 
 function Posts(props: any) {
@@ -41,7 +38,7 @@ function Posts(props: any) {
           <button type='button' className='btn btn-primary' onClick={(e) => createNewPost(e)}>
             <FontAwesomeIcon icon={faPen} />
             New Post</button>
-          
+
         </div>
       </div>
 

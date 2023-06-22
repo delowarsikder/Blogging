@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { Box, Container, Divider, Link, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 
-import Logo from "../components/Logo";
+import Logo from "../../components/Logo";
 import SignupForm from "./Form/SignupForm";
 import SocialAuth from "./SocialIcon/SocialAuth";
 

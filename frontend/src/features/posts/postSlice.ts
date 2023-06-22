@@ -50,6 +50,7 @@ export interface PostDeleteData {
     id: number;
   }
 }
+
 export interface PostUpdateData {
   post: {
     id: number | undefined;
@@ -57,7 +58,6 @@ export interface PostUpdateData {
     body: string;
   }
 }
-
 
 export const createPostAsync = createAsyncThunk(
   'posts/createPost',

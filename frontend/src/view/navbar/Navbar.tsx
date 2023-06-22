@@ -57,8 +57,8 @@ function Navbar() {
             Thoughts
           </Typography>
         </Box>
-        <Button className={classes.button} href="/signin">Login</Button>
-        <Button className={classes.button} component={Link} to={'/signup'}>Create Account</Button>
+        <Button className={classes.button} href="/auth/signin">Login</Button>
+        <Button className={classes.button} component={Link} to={'/auth/signup'}>Create Account</Button>
       </Toolbar>
     </AppBar>
   );
