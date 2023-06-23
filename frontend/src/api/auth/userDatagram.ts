@@ -31,7 +31,7 @@ const initialState: UserRegistrationState = {
 }
 
 export interface UserRegistrationFormData {
-  post: {
+  user: {
     id?: number;
     first_name?: string,
     last_name?: string,
@@ -40,16 +40,12 @@ export interface UserRegistrationFormData {
   }
 }
 
-export interface PostDeleteData {
-  post: {
-    id: number;
-  }
-}
-export interface PostUpdateData {
-  post: {
+export interface UserLoginData {
+  user: {
     id: number | undefined;
     title: string;
     body: string;
   }
 }
+
 

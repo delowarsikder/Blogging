@@ -40,6 +40,8 @@ Things you may want to cover:
 ### References: https://youtu.be/ZGnMqKg-Cq4
 ## Protect Route: https://dev.to/franklin030601/route-protection-with-react-router-dom-12gm#3
 ## Registrantion : https://github.com/eric-ricky/auth-mui-template
+## Rails AuthController: https://rapidapi.com/blog/convert-rails-app-api
+### Serializer : https://launchacademy.com/blog/the-basics-of-building-an-api-in-ruby-on-rails
 
 ## cd/frontend 
 then apply this command

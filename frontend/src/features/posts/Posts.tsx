@@ -16,7 +16,6 @@ function Posts(props: any) {
   const status = useAppSelector(selectStatus);
   const dispatch = useDispatch<any>();
   const navigator = useNavigate();
-
   useEffect(() => {
     dispatch(fetchPostsAsync());
   }, [dispatch])
@@ -38,7 +37,6 @@ function Posts(props: any) {
           <button type='button' className='btn btn-primary' onClick={(e) => createNewPost(e)}>
             <FontAwesomeIcon icon={faPen} />
             New Post</button>
-
         </div>
       </div>
 

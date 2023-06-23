@@ -1,32 +1,16 @@
-import { PostDeleteData, PostFormData, PostUpdateData, PostsState } from "./postSlice";
+import { UserRegistrationState, UserRegistrationFormData, UserLoginData } from "./userDatagram";
+import { BASE_URL } from "../../api/endPoint";
+const API_URL = BASE_URL;
 
-import { UserRegistrationState } from "./userDatagram";
-
-const API_URL = "http://127.0.0.1:3000";
-
-export async function fetchPosts() {
-  return fetch(`${API_URL}/posts.json`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then(response => response.json())
-    .catch((error) => {
-      console.log("Error: ", error);
-      return {} as PostsState;
-    });
-}
-
-export async function createPost(payload: PostFormData) {
-  const post = payload.post;
-  return fetch(`${API_URL}/posts.json`, {
+export async function createUser(payload: UserRegistrationFormData) {
+  const user = payload.user;
+  return fetch(`${API_URL}/api/v1/posts.json`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      post,
+      user,
     }),
   })
     .then(response => {
@@ -35,42 +19,25 @@ export async function createPost(payload: PostFormData) {
     })
     .catch((error) => {
       console.log("Error: ", error);
-      return {} as PostsState;
+      return {} as UserRegistrationState;
     });
 }
 
-export async function destroyPost(payload: PostDeleteData) {
-  const post = payload.post;
-  return fetch(`${API_URL}/posts/${post.id}.json`, {
-    method: "DELETE",
+
+export async function loginUser(payload: UserLoginData) {
+  const user = payload.user;
+  return fetch(`${API_URL}/api/v1/posts/${user.id}.json`, {
+    method: "get",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      post,
+      user,
     }),
   })
     .then(response => response.json())
     .catch((error) => {
       console.log("Error: ", error);
-      return {} as PostsState;
-    });
-}
-
-export async function updatePost(payload: PostUpdateData) {
-  const post = payload.post;
-  return fetch(`${API_URL}/posts/${post.id}.json`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      post,
-    }),
-  })
-    .then(response => response.json())
-    .catch((error) => {
-      console.log("Error: ", error);
-      return {} as PostsState;
+      return {} as UserRegistrationState;
     });
 }

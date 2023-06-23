@@ -1,8 +1,8 @@
 import { PostDeleteData, PostFormData, PostUpdateData, PostsState } from "./postSlice";
-const API_URL = "http://127.0.0.1:3000";
+import { BASE_URL } from "../../api/endPoint";
 
 export async function fetchPosts() {
-  return fetch(`${API_URL}/posts.json`, {
+  return fetch(`${BASE_URL}/api/v1/posts.json`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -17,7 +17,7 @@ export async function fetchPosts() {
 
 export async function createPost(payload: PostFormData) {
   const post = payload.post;
-  return fetch(`${API_URL}/posts.json`, {
+  return fetch(`${BASE_URL}/api/v1/posts.json`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -27,7 +27,7 @@ export async function createPost(payload: PostFormData) {
     }),
   })
     .then(response => {
-      // console.log(JSON.stringify(response));
+      console.log(JSON.stringify(response));
       return response.json()
     })
     .catch((error) => {
@@ -38,7 +38,7 @@ export async function createPost(payload: PostFormData) {
 
 export async function destroyPost(payload: PostDeleteData) {
   const post = payload.post;
-  return fetch(`${API_URL}/posts/${post.id}.json`, {
+  return fetch(`${BASE_URL}/api/v1/posts/${post.id}.json`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -56,7 +56,7 @@ export async function destroyPost(payload: PostDeleteData) {
 
 export async function updatePost(payload: PostUpdateData) {
   const post = payload.post;
-  return fetch(`${API_URL}/posts/${post.id}.json`, {
+  return fetch(`${BASE_URL}/api/v1/posts/${post.id}.json`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -71,3 +71,4 @@ export async function updatePost(payload: PostUpdateData) {
       return {} as PostsState;
     });
 }
+
