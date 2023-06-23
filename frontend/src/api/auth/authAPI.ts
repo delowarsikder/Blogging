@@ -3,14 +3,14 @@ import { BASE_URL } from "../../api/endPoint";
 const API_URL = BASE_URL;
 
 export async function createUser(payload: UserRegistrationFormData) {
-  const user = payload.user;
-  return fetch(`${API_URL}/api/v1/posts.json`, {
+  const userData = payload.userRegistraionInfo;
+  return fetch(`${API_URL}/api/v1/authentication.json`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      user,
+      userData,
     }),
   })
     .then(response => {

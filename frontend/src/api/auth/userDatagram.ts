@@ -2,8 +2,8 @@ import { Statuses } from "../utils";
 
 export interface RegistrationData {
   id?: number;
-  first_name?: string,
-  last_name?: string,
+  firstName?: string,
+  lastName?: string,
   email?: string,
   password?: string,
   created_at?: any;
@@ -19,8 +19,8 @@ const initialState: UserRegistrationState = {
   users: [
     {
       id: undefined,
-      first_name: "",
-      last_name: "",
+      firstName: "",
+      lastName: "",
       email: "",
       password: "",
       created_at: null,
@@ -31,10 +31,10 @@ const initialState: UserRegistrationState = {
 }
 
 export interface UserRegistrationFormData {
-  user: {
+  userRegistraionInfo: {
     id?: number;
-    first_name?: string,
-    last_name?: string,
+    firstName?: string,
+    lastName?: string,
     email?: string,
     password?: string,
   }

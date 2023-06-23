@@ -6,6 +6,11 @@ class Api::V1::AuthenticationController < ApplicationController
 
   private
 
+  # Only allow a list of trusted parameters through.
+  def user_registration_params
+    params.require(:user).permit(:first_name,:last_name,:email, :password)
+  end
+
   def check_basic_auth
     unless request.authorization.present?
       head :unauthorized

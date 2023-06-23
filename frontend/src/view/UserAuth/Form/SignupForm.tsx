@@ -43,7 +43,7 @@ const SignupForm = ({ setAuth }: any) => {
       .email("Email must be a valid email address")
       .required("Email is required"),
     password: yup.string()
-      .min(8, "Password must have at least 8 characters")
+      // .min(8, "Password must have at least 8 characters")
       .required("Password is required")
     // .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/, "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"),
     , confirmPassword: yup.string()
@@ -60,10 +60,17 @@ const SignupForm = ({ setAuth }: any) => {
       confirmPassword: "",
     },
     validationSchema: SignupSchema,
-    onSubmit: () => {
+    onSubmit: (userInfo) => {
       setTimeout(() => {
-        setAuth(true);
-        navigate("/", { replace: true });
+        const userRegistraionData={
+          firstName: userInfo.firstName,
+          lastName: userInfo.lastName,
+          email: userInfo.email,
+          password: userInfo.password,
+        }
+        console.log(userRegistraionData);
+        // setAuth(true);
+        // navigate("/", { replace: true });
       }, 2000);
     },
   });
