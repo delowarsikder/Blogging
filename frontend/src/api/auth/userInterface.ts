@@ -15,7 +15,7 @@ export interface UserRegistrationState {
   status: string;
 }
 
-const initialState: UserRegistrationState = {
+export const initialState: UserRegistrationState = {
   users: [
     {
       id: undefined,
@@ -31,20 +31,19 @@ const initialState: UserRegistrationState = {
 }
 
 export interface UserRegistrationFormData {
-  userRegistraionInfo: {
+  userRegistrationInfo: {
     id?: number;
-    firstName?: string,
-    lastName?: string,
-    email?: string,
-    password?: string,
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
   }
 }
 
-export interface UserLoginData {
-  user: {
-    id: number | undefined;
-    title: string;
-    body: string;
+export interface UserLoginFormData {
+  userLoginInfo: {
+    email: string;
+    password: string;
   }
 }
 

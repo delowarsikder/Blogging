@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import { Form, FormikProvider, useFormik } from "formik";
 import * as Yup from "yup";
-
+import { useDispatch, useSelector } from 'react-redux';
+import { LoadingButton } from "@mui/lab";
+import { Icon } from "@iconify/react";
+import { motion } from "framer-motion";
+import { loginUserAsync } from "../../../api/auth/authActions";
 import {
   Box,
   Checkbox,
@@ -13,9 +17,6 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import { LoadingButton } from "@mui/lab";
-import { Icon } from "@iconify/react";
-import { motion } from "framer-motion";
 
 let easing = [0.6, -0.05, 0.01, 0.99];
 const animate = {
@@ -28,12 +29,13 @@ const animate = {
   },
 };
 
-const SigninForm = ({ setAuth }: any) => {
+const SigninForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch<any>()
   const from = location.state?.from?.pathname || "/";
-
-  const [showPassword, setShowPassword] = useState(false);
+  const { loading, error } = useSelector((state: any) => state.auth);
 
   const SigninSchema = Yup.object().shape({
     email: Yup.string()
@@ -49,23 +51,25 @@ const SigninForm = ({ setAuth }: any) => {
       remember: false,
     },
     validationSchema: SigninSchema,
-    onSubmit: (value) => {
-      console.log("submitting...", value);
-      console.log('email: ', value.email);
-      console.log('password: ', value.password);
-      console.log('remember: ', value.remember);
+    onSubmit: (loginInfo) => {
+      //store the cookie for remember me
+      const rememberMe = loginInfo.remember;
       //call api to check the user login info then if valid
-
       setTimeout(() => {
-        console.log("submited!!");
-        setAuth(true);
+        const formData = {
+          userLoginInfo: {
+            email: loginInfo.email.toLowerCase(),
+            password: loginInfo.password,
+          }
+        }
+        console.log("loginInfo: ", formData);
+        dispatch(loginUserAsync(formData));
         navigate(from, { replace: true });
       }, 2000);
     },
   });
 
   const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
-
   return (
     <FormikProvider value={formik}>
       <Form id="signin-form" autoComplete="off" noValidate onSubmit={handleSubmit}>
@@ -132,7 +136,7 @@ const SigninForm = ({ setAuth }: any) => {
               direction="row"
               alignItems="center"
               justifyContent="space-between"
-              sx={{ my: 2 }}
+              sx={{ my: 1 }}
             >
               <FormControlLabel
                 control={

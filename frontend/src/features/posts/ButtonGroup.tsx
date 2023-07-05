@@ -2,8 +2,8 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
+import { destroyPostAsync } from "../../api/post/postSlice";
 import { openModal } from '../modal/modalSlice';
-import { destroyPostAsync } from "./postSlice";
 
 function ButtonGroup(props: any) {
   const navigator = useNavigate();

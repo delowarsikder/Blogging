@@ -25,12 +25,7 @@ const fadeInUp = {
 export default function ForgetPassword() {
   return (
     <Container component="main" maxWidth="sm">
-
-
       <Logo />
-      <Typography component="h1" variant="h5">
-        Forget Password
-      </Typography>
       <Box
         sx={{
           boxShadow: 3,
@@ -43,12 +38,13 @@ export default function ForgetPassword() {
           alignItems: "center",
         }}
       >
-        <Typography component="h6">
+        <Typography component="h1" variant="h5">  Forget Password</Typography>
+        <Typography component="p">
           You will receive a link to create a new password via email.
         </Typography>
         <ForgetPasswordForm />
 
-        <Link to="/signin" >
+        <Link to="/auth/signin" >
           {"Remember your password?"}
         </Link>
       </Box>

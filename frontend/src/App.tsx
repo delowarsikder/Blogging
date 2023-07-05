@@ -12,7 +12,6 @@ import Posts from './features/posts/Posts';
 import Error from './pages/error';
 import Signin from './view/UserAuth/Signin';
 import Signup from './view/UserAuth/Signup';
-// import Container from "@mui/material/Container";
 import { useDispatch } from 'react-redux';
 import ForgetPassword from './view/UserAuth/ForgetPassword';
 import Layout from './view/Layout';
@@ -22,23 +21,26 @@ function App() {
   const dispatch = useDispatch<any>();
   const [auth, setAuth] = useState(false);
   return (
-    <Layout>
-      <div className="App container">
-        <Routes>
-          <Route path="/" element={<Posts />} />
-          <Route path="/error" element={<Error />} />
-          <Route path='*' element={<Navigate to='/error' replace />} />
-          <Route path='/auth/signin' element={<Signin setAuth={setAuth} />} />
-          <Route path='/auth/signup' element={<Signup setAuth={setAuth} />} />
-          <Route path='/forget-password' element={<ForgetPassword />} />
-          <Route path='/aboutus' element={<AboutUs />} />
-          <Route path='/*' element={<PrivateOutlet auth={auth} />}>
-            <Route path='postedit' element={<PostEdit />} />
-            <Route path='newform' element={<NewForm />} />
-          </Route>
-        </Routes>
-      </div>
-    </Layout>
+    <div>
+      <Layout>
+        <div className="App container">
+          <Routes>
+            <Route path="/" element={<Posts />} />
+            <Route path="/error" element={<Error />} />
+            <Route path='*' element={<Navigate to='/error' replace />} />
+            <Route path='/auth/signin' element={<Signin />} />
+            <Route path='/auth/signup' element={<Signup />} />
+            <Route path='/forget-password' element={<ForgetPassword />} />
+            <Route path='/aboutus' element={<AboutUs />} />
+            <Route path='/*' element={<PrivateOutlet />}>
+              <Route path='postedit' element={<PostEdit />} />
+              <Route path='newform' element={<NewForm />} />
+            </Route>
+          </Routes>
+        </div>
+      </Layout>
+
+    </div>
   );
 }
 

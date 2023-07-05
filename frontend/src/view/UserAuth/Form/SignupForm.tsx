@@ -1,7 +1,8 @@
 import * as yup from "yup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormik, Form, FormikProvider } from "formik";
 import { useNavigate } from "react-router-dom";
+import { useForm } from 'react-hook-form'
 import {
   Stack,
   Box,
@@ -12,6 +13,10 @@ import {
 import { LoadingButton } from "@mui/lab";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
+
+import { createUserAsync } from "../../../api/auth/authActions";
+
+import { useDispatch, useSelector } from 'react-redux'
 
 let easing = [0.6, -0.05, 0.01, 0.99];
 const animate = {
@@ -24,21 +29,24 @@ const animate = {
   },
 };
 
-const SignupForm = ({ setAuth }: any) => {
-  const navigate = useNavigate();
-
+const SignupForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
+  const dispatch = useDispatch<any>();
+  const navigate = useNavigate();
+  const { loading, userInfo, error, success } = useSelector(
+    (state: any) => state.auth
+  )
+  const { register } = useForm();
   const SignupSchema = yup.object().shape({
     firstName: yup.string()
       .min(2, "Too Short!")
       .max(50, "Too Long!")
-      .required("First name required"),
+      .required("First name is required"),
     lastName: yup.string()
       .min(2, "Too Short!")
       .max(50, "Too Long!")
-      .required("Last name required"),
+      .required("Last name is required"),
     email: yup.string()
       .email("Email must be a valid email address")
       .required("Email is required"),
@@ -51,6 +59,16 @@ const SignupForm = ({ setAuth }: any) => {
       .oneOf([yup.ref("password")], "Passwords does not match"),
   });
 
+  useEffect(() => {
+    //redirect to login page if registration successfull
+    if (success) {
+      navigate('/auth/signin');
+    }
+    if (Object.keys(userInfo).length) {
+      navigate('/');
+    }
+  }, [navigate, userInfo, success]);
+
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -62,13 +80,18 @@ const SignupForm = ({ setAuth }: any) => {
     validationSchema: SignupSchema,
     onSubmit: (userInfo) => {
       setTimeout(() => {
-        const userRegistraionData={
-          firstName: userInfo.firstName,
-          lastName: userInfo.lastName,
-          email: userInfo.email,
-          password: userInfo.password,
+        const formData = {
+          userRegistrationInfo: {
+            firstName: userInfo.firstName,
+            lastName: userInfo.lastName,
+            email: userInfo.email.toLowerCase(),
+            password: userInfo.password,
+          }
         }
-        console.log(userRegistraionData);
+        console.log(formData);
+        dispatch(createUserAsync(formData));
+
+
         // setAuth(true);
         // navigate("/", { replace: true });
       }, 2000);

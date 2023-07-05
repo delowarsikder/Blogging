@@ -1,8 +1,6 @@
 import { Box, Container, Divider, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-
-
 import Logo from "../../components/Logo";
 import SigninForm from "./Form/SigninForm";
 import SocialAuth from "./SocialIcon/SocialAuth";
@@ -35,16 +33,16 @@ export default function Signin({ setAuth }: any) {
         sx={{
           boxShadow: 3,
           borderRadius: 2,
-          // px: 4,
-          py: 4,
+          px: 0,
+          py: 2,
           marginTop: 2,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
         }}
       >
-        <SigninForm setAuth={setAuth} />
-        <Link to="/signup" >
+        <SigninForm />
+        <Link to="/auth/signup" >
           {"Don't have an account? Sign Up"}
         </Link>
 

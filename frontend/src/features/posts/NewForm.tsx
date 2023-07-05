@@ -1,9 +1,7 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
-import { createPostAsync } from './postSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Navigate } from 'react-router-dom';
-import { redirectTo } from '../../components/Utils';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { createPostAsync } from '../../api/post/postSlice';
 
 function NewForm() {
   const dispatch = useDispatch<any>();

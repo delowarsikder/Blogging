@@ -50,7 +50,6 @@ export interface PostDeleteData {
     id: number;
   }
 }
-
 export interface PostUpdateData {
   post: {
     id: number | undefined;
@@ -58,6 +57,7 @@ export interface PostUpdateData {
     body: string;
   }
 }
+
 
 export const createPostAsync = createAsyncThunk(
   'posts/createPost',
@@ -199,5 +199,4 @@ export const selectPosts = (state: RootState) => state.posts.posts;
 export const selectStatus = (state: RootState) => state.posts.status;
 
 export default postSlice.reducer;
-
 

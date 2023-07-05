@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import { Form, FormikProvider, useFormik } from "formik";
-import * as Yup from "yup";
+import * as yup from "yup";
 
 import {
   Box,
@@ -33,13 +33,10 @@ const ForgetPasswordForm = ({ setAuth }: any) => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  const [showPassword, setShowPassword] = useState(false);
-
-  const SigninSchema = Yup.object().shape({
-    email: Yup.string()
-      .email("Provide a valid email address")
+  const SigninSchema = yup.object().shape({
+    email: yup.string()
+      .email("Email must be a valid email address")
       .required("Email is required"),
-    password: Yup.string().required("Password is required"),
   });
 
   const formik = useFormik({
@@ -93,14 +90,13 @@ const ForgetPasswordForm = ({ setAuth }: any) => {
               error={Boolean(touched.email && errors.email)}
               helperText={touched.email && errors.email}
             />
-
           </Box>
 
           <Stack
             direction="column"
             alignItems="center"
             justifyContent="space-between"
-            sx={{ my: 2 }}
+            sx={{ my: 1 }}
           >
             <LoadingButton
               fullWidth

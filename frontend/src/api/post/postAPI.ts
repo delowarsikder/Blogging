@@ -1,5 +1,5 @@
+import { BASE_URL } from "../endPoint";
 import { PostDeleteData, PostFormData, PostUpdateData, PostsState } from "./postSlice";
-import { BASE_URL } from "../../api/endPoint";
 
 export async function fetchPosts() {
   return fetch(`${BASE_URL}/api/v1/posts.json`, {

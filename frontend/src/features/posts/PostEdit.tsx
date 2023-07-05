@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useLocation, useNavigate } from 'react-router-dom'
-import { updatePostAsync } from "./postSlice";
-import { redirectTo } from "../../components/Utils";
+import { useLocation, useNavigate } from 'react-router-dom';
+import { updatePostAsync } from "../../api/post/postSlice";
 
 function PostEdit() {
   const dispatch = useDispatch<any>();
