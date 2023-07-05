@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import { Form, FormikProvider, useFormik } from "formik";
 import * as Yup from "yup";
@@ -35,7 +35,7 @@ const SigninForm = () => {
   const location = useLocation();
   const dispatch = useDispatch<any>()
   const from = location.state?.from?.pathname || "/";
-  const { loading, error } = useSelector((state: any) => state.auth);
+  const { loading, error, userInfo } = useSelector((state: any) => state.auth);
 
   const SigninSchema = Yup.object().shape({
     email: Yup.string()
@@ -69,109 +69,115 @@ const SigninForm = () => {
     },
   });
 
-  const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
-  return (
-    <FormikProvider value={formik}>
-      <Form id="signin-form" autoComplete="off" noValidate onSubmit={handleSubmit}>
+  useEffect(() => {
+    if (Object.keys(userInfo).length) {
+      navigate('/');
+    }
+  }, [navigate, userInfo])
+
+const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
+return (
+  <FormikProvider value={formik}>
+    <Form id="signin-form" autoComplete="off" noValidate onSubmit={handleSubmit}>
+      <Box
+        component={motion.div}
+        animate={{
+          transition: {
+            staggerChildren: 0.55,
+          },
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 3,
+          }}
+          component={motion.div}
+          initial={{ opacity: 0, y: 30 }}
+          animate={animate}
+        >
+          <TextField
+            fullWidth
+            autoComplete="useremail"
+            type="email"
+            label="Email Address"
+            {...getFieldProps("email")}
+            error={Boolean(touched.email && errors.email)}
+            helperText={touched.email && errors.email}
+          />
+
+          <TextField
+            fullWidth
+            autoComplete="current-password"
+            type={showPassword ? "text" : "password"}
+            label="Password"
+            {...getFieldProps("password")}
+            error={Boolean(touched.password && errors.password)}
+            helperText={touched.password && errors.password}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={() => setShowPassword((prev) => !prev)}
+                  >
+                    {showPassword ? (
+                      <Icon icon="eva:eye-fill" />
+                    ) : (
+                      <Icon icon="eva:eye-off-fill" />
+                    )}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Box>
+
         <Box
           component={motion.div}
-          animate={{
-            transition: {
-              staggerChildren: 0.55,
-            },
-          }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={animate}
         >
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 3,
-            }}
-            component={motion.div}
-            initial={{ opacity: 0, y: 30 }}
-            animate={animate}
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+            sx={{ my: 1 }}
           >
-            <TextField
-              fullWidth
-              autoComplete="useremail"
-              type="email"
-              label="Email Address"
-              {...getFieldProps("email")}
-              error={Boolean(touched.email && errors.email)}
-              helperText={touched.email && errors.email}
+            <FormControlLabel
+              control={
+                <Checkbox
+                  {...getFieldProps("remember")}
+                  checked={values.remember}
+                />
+              }
+              label="Remember me"
             />
 
-            <TextField
-              fullWidth
-              autoComplete="current-password"
-              type={showPassword ? "text" : "password"}
-              label="Password"
-              {...getFieldProps("password")}
-              error={Boolean(touched.password && errors.password)}
-              helperText={touched.password && errors.password}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      onClick={() => setShowPassword((prev) => !prev)}
-                    >
-                      {showPassword ? (
-                        <Icon icon="eva:eye-fill" />
-                      ) : (
-                        <Icon icon="eva:eye-off-fill" />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </Box>
+            <Link
+              component={RouterLink}
+              variant="subtitle2"
+              to="/forget-password"
+              underline="hover"
+            >
+              Forgot password?
+            </Link>
+          </Stack>
 
-          <Box
-            component={motion.div}
-            initial={{ opacity: 0, y: 20 }}
-            animate={animate}
+          <LoadingButton
+            fullWidth
+            size="large"
+            type="submit"
+            variant="contained"
+            loading={isSubmitting}
           >
-            <Stack
-              direction="row"
-              alignItems="center"
-              justifyContent="space-between"
-              sx={{ my: 1 }}
-            >
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    {...getFieldProps("remember")}
-                    checked={values.remember}
-                  />
-                }
-                label="Remember me"
-              />
-
-              <Link
-                component={RouterLink}
-                variant="subtitle2"
-                to="/forget-password"
-                underline="hover"
-              >
-                Forgot password?
-              </Link>
-            </Stack>
-
-            <LoadingButton
-              fullWidth
-              size="large"
-              type="submit"
-              variant="contained"
-              loading={isSubmitting}
-            >
-              {isSubmitting ? "loading..." : "Login"}
-            </LoadingButton>
-          </Box>
+            {isSubmitting ? "loading..." : "Login"}
+          </LoadingButton>
         </Box>
-      </Form>
-    </FormikProvider>
-  );
+      </Box>
+    </Form>
+  </FormikProvider>
+);
 };
 
 export default SigninForm;
