@@ -84,7 +84,7 @@ module Api
 
       # Only allow a list of trusted parameters through.
       def post_params
-        params.require(:post).permit(:title, :body, :id)
+        params.require(:post).permit(:title, :body)
       end
     end
   end

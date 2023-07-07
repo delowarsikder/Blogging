@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_15_122145) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_07_053319) do
   create_table "auth_tokens", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "user_id"
     t.string "activation_token"
@@ -40,13 +40,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_15_122145) do
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.string "user_name"
     t.string "email"
-    t.string "password"
-    t.string "reset_password_token"
-    t.timestamp "reset_password_sent_at"
-    t.boolean "active_status"
-    t.string "image"
+    t.string "password_digest"
+    t.string "confirmation_token"
+    t.string "confimed_at"
+    t.string "confirmation_sent_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

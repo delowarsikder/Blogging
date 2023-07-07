@@ -3,14 +3,11 @@ class CreateUsers < ActiveRecord::Migration[7.0]
     create_table :users do |t|
       t.string :first_name
       t.string :last_name
-      t.string :user_name
       t.string :email
-      t.string :password
-      t.string :reset_password_token
-      t.timestamp :reset_password_sent_at
-      t.boolean :active_status
-      t.string :image
-
+      t.string :password_digest
+      t.string :confirmation_token
+      t.string :confimed_at
+      t.string :confirmation_sent_at
       t.timestamps
     end
   end

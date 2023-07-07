@@ -3,14 +3,14 @@ import { UserLoginFormData, UserRegistrationFormData, UserRegistrationState } fr
 const API_URL = BASE_URL;
 
 export async function createUser(payload: UserRegistrationFormData) {
-  const userData = payload.userRegistrationInfo;
-  return fetch(`${API_URL}/api/v1/authentication.json`, {
+  const users = payload.userRegistrationInfo;
+  return fetch(`${API_URL}/api/v1/auth/registration`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      userData,
+      users,
     }),
   })
     .then(response => {
@@ -24,14 +24,14 @@ export async function createUser(payload: UserRegistrationFormData) {
 }
 
 export async function loginUser(payload: UserLoginFormData) {
-  const loginData=payload.userLoginInfo;
-  return fetch(`${API_URL}/api/v1/authentication.json`, {
+  const users=payload.userLoginInfo;
+  return fetch(`${API_URL}/api/v1/auth/login`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      loginData,
+      users,
     }),
   })
     .then(response => {

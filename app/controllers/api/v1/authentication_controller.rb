@@ -1,30 +1,33 @@
 # frozen_string_literal: true
 
-class Api::V1::AuthenticationController < ApplicationController
-  before_action :check_basic_auth
-  skip_before_action :verify_authenticity_token
+module Api
+  module V1
+    class AuthenticationController < ApplicationController
+      before_action :authorize_request, except: :login
 
-  private
+      def registration
+        @user = User.new(user_params)
+        if @user.save
+          render json: { success: 'Confirmation email send' }, status: :ok
+        else
+          render json: { error: @user.error }, status: :unauthorized
+        end
+      end
 
-  # Only allow a list of trusted parameters through.
-  def user_registration_params
-    params.require(:user).permit(:first_name,:last_name,:email, :password)
-  end
+      def login
+        @user = User.find_by_email(params[:email])
+        # if @user&.authenticate(params[:password])
+      end
 
-  def check_basic_auth
-    unless request.authorization.present?
-      head :unauthorized
-      return
-    end
-    authenticate_with_http_basic do |email, password|
-      user = User.find_by(email: email.downcase)
-      if user && user.authenticate(password)
-        @current_user = user
-      else
-        head :unauthorized
+      private
+
+      def user_params
+        params.require(:users).permit(:first_name, :last_name, :email, :password)
+      end
+
+      def login_params
+        params.permit(:email, :password)
       end
     end
   end
-
-  attr_reader :current_user
 end

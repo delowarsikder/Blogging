@@ -82,15 +82,14 @@ const SignupForm = () => {
       setTimeout(() => {
         const formData = {
           userRegistrationInfo: {
-            firstName: userInfo.firstName,
-            lastName: userInfo.lastName,
+            first_name: userInfo.firstName,
+            last_name: userInfo.lastName,
             email: userInfo.email.toLowerCase(),
             password: userInfo.password,
           }
         }
         console.log(formData);
         dispatch(createUserAsync(formData));
-
 
         // setAuth(true);
         // navigate("/", { replace: true });
