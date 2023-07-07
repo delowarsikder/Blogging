@@ -3,27 +3,29 @@
 module Api
   module V1
     class AuthenticationController < ApplicationController
-      before_action :authorize_request, except: :login
 
-      def registration
-        @user = User.new(user_params)
-        if @user.save
-          render json: { success: 'Confirmation email send' }, status: :ok
-        else
-          render json: { error: @user.error }, status: :unauthorized
-        end
-      end
+      # Login user into application
 
       def login
         @user = User.find_by_email(params[:email])
-        # if @user&.authenticate(params[:password])
+        if @user && @user.authenticate(params[:password]) # User exist and check password is match
+          if @user.confirm? # Check verify email address or not
+            token = JsonWebTokenService.encode({ email: @user.email })
+            render json: { auth_token: token }
+          else
+            render json: { error: 'Please verify email address' }, status: :unauthorized
+          end
+        else
+          render json: { error: 'Incorrect Email Or password' }, status: :unauthorized
+        end
+      end
+
+      # Log out user from application
+      def destroy
+        render json: { current_user: }
       end
 
       private
-
-      def user_params
-        params.require(:users).permit(:first_name, :last_name, :email, :password)
-      end
 
       def login_params
         params.permit(:email, :password)
