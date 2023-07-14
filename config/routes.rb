@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root 'posts#index'
-  root to: 'api/v1/posts#index'
+  # root to: 'api/v1/posts#index'
   namespace :api do
     namespace :v1 do
       resources :posts
@@ -20,4 +20,5 @@ Rails.application.routes.draw do
     namespace :v2 do
     end
   end
+  get '/*a', to: 'application#not_found'
 end
