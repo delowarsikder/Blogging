@@ -40,6 +40,8 @@ Things you may want to cover:
 ### References: https://youtu.be/ZGnMqKg-Cq4
 ## Protect Route: https://dev.to/franklin030601/route-protection-with-react-router-dom-12gm#3
 ## Registrantion : https://github.com/eric-ricky/auth-mui-template
+## Rails AuthController: https://rapidapi.com/blog/convert-rails-app-api
+### Serializer : https://launchacademy.com/blog/the-basics-of-building-an-api-in-ruby-on-rails
 
 ## cd/frontend 
 then apply this command
@@ -62,4 +64,9 @@ rails generate model User first_name:string last_name:string user_name:string em
 rails g model AuthToken user_id:string activation_token:string token_expire_time:timestamp resend_token_time:timestamp 
 
 rails generate model UserInfo user_id:string current_sign_in_at:timestamp last_sign_in_at:timestamp user_active_status:boolean wrong_login_attemp:integer 
+
+#login : https://www.bluebash.co/blog/rails-6-7-api-authentication-with-jwt/
+#Authorization: https://stevepolito.design/blog/build-an-api-in-rails-with-authentication
+https://www.bacancytechnology.com/blog/build-rails-api-authentication-using-jwt
+
 

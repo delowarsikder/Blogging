@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { createPostAsync, updatePostAsync } from '../../api/post/postSlice';
 import { closeModal } from '../modal/modalSlice';
-import { createPostAsync, updatePostAsync } from './postSlice';
 
 function FormModal(props: any) {
   const { isOpen, data } = useSelector((store: any) => store.modal);
