@@ -12,6 +12,7 @@ class User < ApplicationRecord
 
   before_create :generate_confirmation_token
   after_create :send_confirmation_email
+  has_many :posts, dependent: :destroy
 
   # Token valide for 1 days
   def valid_confimation_token?

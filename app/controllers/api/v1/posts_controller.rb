@@ -7,10 +7,8 @@ module Api
 
       # GET /api/v1/posts or /api/v1/posts.json
       def index
-        @posts = Post.all
+        @posts = current_user.Post.all
         if @posts
-          # format.html { redirect_to api_v1_post_url(@post), notice: 'Post was successfully created.' }
-          # format.json { render :show, status: :created, location: api_v1_post_url(@post) }
           render json: @posts, status: :ok
         else
           render json: @posts.errors, status: :bad_request
@@ -19,9 +17,8 @@ module Api
 
       # GET /api/v1/posts/1 or /api/v1/posts/1.json
       def show
-        post = Post.find(params[:id])
-        if post
-          render json: post, state: :ok
+        if @post
+          render json: @post, state: :ok
         else
           render json: { message: 'post could not be found' }, status: :bad_request
         end
@@ -29,7 +26,7 @@ module Api
 
       # GET /api/v1/posts/new
       def new
-        @post = Post.new
+        @post = current_user.Post.new
       end
 
       # GET /api/v1/posts/1/edit
@@ -37,7 +34,7 @@ module Api
 
       # POST /api/v1/posts or /api/v1/posts.json
       def create
-        @post = Post.new(post_params)
+        @post = current_user.Post.new(post_params)
         respond_to do |format|
           if @post.save
             format.html { redirect_to api_v1_post_url(@post), notice: 'Post was successfully created.' }
@@ -79,7 +76,7 @@ module Api
 
       # Use callbacks to share common setup or constraints between actions.
       def set_post
-        @post = Post.find(params[:id])
+        @post = current_user.Post.find(params[:id])
       end
 
       # Only allow a list of trusted parameters through.
@@ -89,3 +86,4 @@ module Api
     end
   end
 end
+
