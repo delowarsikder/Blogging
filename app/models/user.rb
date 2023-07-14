@@ -10,14 +10,15 @@ class User < ApplicationRecord
 
   before_create :generate_confirmation_token
   after_create :send_confirmation_email
+
+  # Token valide for 1 days
   def valid_confimation_token?
-    # Token valide for 1 days
-    (confirmation_sent_at.to_time + 1.days) > Time.now
+    (self.confirmation_sent_at.to_time + 24.hours) > Time.now
   end
 
   def token_confirmed!
-    self.confirmation_token = nil
     self.confirmed_at = Time.now
+    self.is_activated = true
     save
   end
 
@@ -28,11 +29,13 @@ class User < ApplicationRecord
   private
 
   def generate_confirmation_token
-    self.confirmation_token = SecureRandom.hex(10)
+    return confirmation_token if !confirmation_token.blank? && valid_confimation_token?
+
+    self.confirmation_token = SecureRandom.urlsafe_base64.to_s
     self.confirmation_sent_at = Time.now
   end
 
   def send_confirmation_email
-    SendConfirmationInstructionJob.perform_now(confirmation_token)
+    SendConfirmationInstructionJob.perform_now(self)
   end
 end

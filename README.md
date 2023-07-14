@@ -65,3 +65,8 @@ rails g model AuthToken user_id:string activation_token:string token_expire_time
 
 rails generate model UserInfo user_id:string current_sign_in_at:timestamp last_sign_in_at:timestamp user_active_status:boolean wrong_login_attemp:integer 
 
+#login : https://www.bluebash.co/blog/rails-6-7-api-authentication-with-jwt/
+#Authorization: https://stevepolito.design/blog/build-an-api-in-rails-with-authentication
+https://www.bacancytechnology.com/blog/build-rails-api-authentication-using-jwt
+
+

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :posts
       resources :registrations, only: %i[create destory] do
-        post 'confirm', on: :collection
+        get :confirm_email, on: :collection
       end
       post '/auth/login', to: 'authentication#login'
       get '/auth/logout', to: 'authentication#destroy'

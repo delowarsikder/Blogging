@@ -4,7 +4,7 @@ const API_URL = BASE_URL;
 
 export async function createUser(payload: UserRegistrationFormData) {
   const users = payload.userRegistrationInfo;
-  return fetch(`${API_URL}/api/v1/auth/registration`, {
+  return fetch(`${API_URL}/api/v1/registrations`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

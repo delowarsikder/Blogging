@@ -29,11 +29,9 @@ function ButtonGroup(props: any) {
   return (
     <div className="">
       <button className="btn btn-danger p-2 m-1" onClick={(e) => handleDelete(e)}>
-        <FontAwesomeIcon icon="trash" />
-        Delete</button>
+        <FontAwesomeIcon icon="trash" /> <span className="ms-1"> Delete</span></button>
       <button className="btn btn-warning p-2 m-1" onClick={(e) => handleEdit(e)}>
-        <FontAwesomeIcon icon={faPenToSquare} />
-        Edit</button>
+        <FontAwesomeIcon icon={faPenToSquare} /> <span className="ms-1"> Edit</span></button>
     </div>
   )
 }

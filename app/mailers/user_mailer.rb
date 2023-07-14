@@ -1,9 +1,8 @@
-#frozen_string_literal: true
+# frozen_string_literal: true
 
 class UserMailer < ApplicationMailer
-  def confirmation_notify(token)
-    @user = User.find_by(confirmation_token: token)
-    mail(to: @user.email, subject: 'Confirmation Email Address')
+  def confirmation_notify
+    @user=params
+    mail(to: @user.email, subject: 'Confirmation Email Varification')
   end
 end
-
