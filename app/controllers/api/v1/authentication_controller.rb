@@ -3,12 +3,12 @@
 module Api
   module V1
     class AuthenticationController < ApplicationController
-
+      skip_before_action :authenticate_user, only: [:login]
       # Login user into application
-
       def login
-        @user = User.find_by_email(params[:email])
-        if @user && @user.authenticate(params[:password]) # User exist and check password is match
+        param = params[:user]
+        @user = User.find_by_email(param[:email].downcase)
+        if @user && @user.authenticate(param[:password]) # User exist and check password is match
           if @user.confirm? # Check verify email address or not
             token = JsonWebTokenService.encode({ email: @user.email })
             render json: { auth_token: token }

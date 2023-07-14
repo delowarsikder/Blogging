@@ -3,14 +3,16 @@
 module Api
   module V1
     class RegistrationsController < ApplicationController
-      # skip_before_action :authenticate_user, only: %i[create confirm]
+      skip_before_action :authenticate_user, only: %i[create confirm_email]
       def create
         @user = User.new(user_params)
         if @user.save
           # UserMailer.with(user: @user).confirmation_notify.deliver_now
           render json: { message: 'Confirmation email send' }, status: :created
         else
-          render json: { error: @user.error }, status: :unauthorized
+          render json: { error: @user.errors.messages.map do |msg, desc|
+                                  msg.to_s + ' ' + desc[0]
+                                end.join(', ') }, status: :unauthorized
         end
       end
 
@@ -30,7 +32,7 @@ module Api
         user = User.find_by(confirmation_token: token)
         if user && user&.valid_confimation_token?
           user.token_confirmed!
-          render json: {success: true , message: 'User confirmed successfully' }, status: :created
+          render json: { success: true, message: 'User confirmed successfully' }, status: :created
         else
           render json: { error: 'Invalid token' }, status: :not_found
         end
