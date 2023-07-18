@@ -63,7 +63,9 @@ const SigninForm = () => {
           }
         }
         console.log("loginInfo: ", formData);
-        dispatch(loginUserAsync(formData));
+        const response = dispatch(loginUserAsync(formData));
+        console.log("response: ",response)
+        
         navigate(from, { replace: true });
       }, 2000);
     },
@@ -75,109 +77,109 @@ const SigninForm = () => {
     }
   }, [navigate, userInfo])
 
-const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
-return (
-  <FormikProvider value={formik}>
-    <Form id="signin-form" autoComplete="off" noValidate onSubmit={handleSubmit}>
-      <Box
-        component={motion.div}
-        animate={{
-          transition: {
-            staggerChildren: 0.55,
-          },
-        }}
-      >
+  const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
+  return (
+    <FormikProvider value={formik}>
+      <Form id="signin-form" autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 3,
+          component={motion.div}
+          animate={{
+            transition: {
+              staggerChildren: 0.55,
+            },
           }}
-          component={motion.div}
-          initial={{ opacity: 0, y: 30 }}
-          animate={animate}
         >
-          <TextField
-            fullWidth
-            autoComplete="useremail"
-            type="email"
-            label="Email Address"
-            {...getFieldProps("email")}
-            error={Boolean(touched.email && errors.email)}
-            helperText={touched.email && errors.email}
-          />
-
-          <TextField
-            fullWidth
-            autoComplete="current-password"
-            type={showPassword ? "text" : "password"}
-            label="Password"
-            {...getFieldProps("password")}
-            error={Boolean(touched.password && errors.password)}
-            helperText={touched.password && errors.password}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    onClick={() => setShowPassword((prev) => !prev)}
-                  >
-                    {showPassword ? (
-                      <Icon icon="eva:eye-fill" />
-                    ) : (
-                      <Icon icon="eva:eye-off-fill" />
-                    )}
-                  </IconButton>
-                </InputAdornment>
-              ),
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 3,
             }}
-          />
-        </Box>
-
-        <Box
-          component={motion.div}
-          initial={{ opacity: 0, y: 20 }}
-          animate={animate}
-        >
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-            sx={{ my: 1 }}
+            component={motion.div}
+            initial={{ opacity: 0, y: 30 }}
+            animate={animate}
           >
-            <FormControlLabel
-              control={
-                <Checkbox
-                  {...getFieldProps("remember")}
-                  checked={values.remember}
-                />
-              }
-              label="Remember me"
+            <TextField
+              fullWidth
+              autoComplete="useremail"
+              type="email"
+              label="Email Address"
+              {...getFieldProps("email")}
+              error={Boolean(touched.email && errors.email)}
+              helperText={touched.email && errors.email}
             />
 
-            <Link
-              component={RouterLink}
-              variant="subtitle2"
-              to="/forget-password"
-              underline="hover"
-            >
-              Forgot password?
-            </Link>
-          </Stack>
+            <TextField
+              fullWidth
+              autoComplete="current-password"
+              type={showPassword ? "text" : "password"}
+              label="Password"
+              {...getFieldProps("password")}
+              error={Boolean(touched.password && errors.password)}
+              helperText={touched.password && errors.password}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setShowPassword((prev) => !prev)}
+                    >
+                      {showPassword ? (
+                        <Icon icon="eva:eye-fill" />
+                      ) : (
+                        <Icon icon="eva:eye-off-fill" />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Box>
 
-          <LoadingButton
-            fullWidth
-            size="large"
-            type="submit"
-            variant="contained"
-            loading={isSubmitting}
+          <Box
+            component={motion.div}
+            initial={{ opacity: 0, y: 20 }}
+            animate={animate}
           >
-            {isSubmitting ? "loading..." : "Login"}
-          </LoadingButton>
+            <Stack
+              direction="row"
+              alignItems="center"
+              justifyContent="space-between"
+              sx={{ my: 1 }}
+            >
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    {...getFieldProps("remember")}
+                    checked={values.remember}
+                  />
+                }
+                label="Remember me"
+              />
+
+              <Link
+                component={RouterLink}
+                variant="subtitle2"
+                to="/forget-password"
+                underline="hover"
+              >
+                Forgot password?
+              </Link>
+            </Stack>
+
+            <LoadingButton
+              fullWidth
+              size="large"
+              type="submit"
+              variant="contained"
+              loading={isSubmitting}
+            >
+              {isSubmitting ? "loading..." : "Login"}
+            </LoadingButton>
+          </Box>
         </Box>
-      </Box>
-    </Form>
-  </FormikProvider>
-);
+      </Form>
+    </FormikProvider>
+  );
 };
 
 export default SigninForm;

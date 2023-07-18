@@ -53,6 +53,10 @@ then apply this command
 * npm i @mui/lab
 * npm install react-hook-form @hookform/resolvers yup
 * npm install @mui/styles
+### install jwt decoder
+* npm install jwt-decode
+ ## Save token time
+ * npm install moment --save
 
 ## Gemfile
 >> add this line 
@@ -69,4 +73,6 @@ rails generate model UserInfo user_id:string current_sign_in_at:timestamp last_s
 #Authorization: https://stevepolito.design/blog/build-an-api-in-rails-with-authentication
 https://www.bacancytechnology.com/blog/build-rails-api-authentication-using-jwt
 
+### Reset password token: https://medium.com/binar-academy/forgot-password-feature-on-rails-api-8e4a7368c59
+### mail : https://medium.com/@pascales/welcome-email-for-new-user-using-action-mailer-becdb43ee6a
 

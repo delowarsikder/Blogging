@@ -1,17 +1,17 @@
 import { BASE_URL } from "../../api/endPoint";
+import { setToken, setTokenExpiration } from "../utils";
 import { UserLoginFormData, UserRegistrationFormData, UserRegistrationState } from "./userInterface";
 const API_URL = BASE_URL;
 
 export async function createUser(payload: UserRegistrationFormData) {
-  const users = payload.userRegistrationInfo;
+  const user = payload.userRegistrationInfo;
   return fetch(`${API_URL}/api/v1/registrations`, {
     method: "POST",
+    cache: "no-cache",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      users,
-    }),
+    body: JSON.stringify(user),
   })
     .then(response => {
       console.log(JSON.stringify(response));
@@ -24,26 +24,50 @@ export async function createUser(payload: UserRegistrationFormData) {
 }
 
 export async function loginUser(payload: UserLoginFormData) {
-  const users=payload.userLoginInfo;
-  return fetch(`${API_URL}/api/v1/auth/login`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      users,
-    }),
-  })
-    .then(response => {
-      console.log(JSON.stringify(response));
-      return response.json()
-    })
-    .catch((error) => {
-      console.log("Error: ", error);
-      return {} as UserRegistrationState;
+  const user = payload.userLoginInfo;
+  let valid = false;
+  try {
+    const response = await fetch(`${API_URL}/api/v1/auth/login`, {
+      method: "POST",
+      cache: "no-cache",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
     });
-  
+    var loginResult = await response.json();
+    valid = loginResult.success && loginResult.auth_token != null;
+  } catch (except) {
+    valid = false;
+  }
+  if (!valid) {
+    if (
+      loginResult &&
+      loginResult.error &&
+      loginResult.error.user_authentication
+    )
+      return {
+        valid: false,
+        message: loginResult.error.user_authentication,
+      };
+
+    return {
+      valid: false,
+      message: "Something unexpected happened",
+    };
+  }
+  setToken(loginResult.auth_token);
+  setTokenExpiration(loginResult.token_expiration);
+  return {
+    valid: true,
+    auth_token: loginResult.auth_token,
+  };
+
 }
+
+
+
+
 
 // export async function loginUser(payload: UserLoginData) {
 //   const user = payload.user;

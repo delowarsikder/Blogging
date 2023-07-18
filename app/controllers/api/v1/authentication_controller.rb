@@ -12,7 +12,7 @@ module Api
           if @user.confirm? # Check verify email address or not
             token = JsonWebTokenService.encode({ email: @user.email })
             time = Time.now + 1.hours
-            render json: { auth_token: token, expired: time.strftime('%m-%d-%Y %H:%M:%S'), email: @user.email },
+            render json: { success: true, auth_token: token, token_expiration: time.strftime('%m-%d-%Y %H:%M:%S'), email: @user.email, user_id: @user.id },
                    status: :ok
           else
             render json: { error: 'Please verify email address' }, status: :unauthorized
