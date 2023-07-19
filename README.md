@@ -76,3 +76,6 @@ https://www.bacancytechnology.com/blog/build-rails-api-authentication-using-jwt
 ### Reset password token: https://medium.com/binar-academy/forgot-password-feature-on-rails-api-8e4a7368c59
 ### mail : https://medium.com/@pascales/welcome-email-for-new-user-using-action-mailer-becdb43ee6a
 
+## Friend : https://kubilaycaglayan.medium.com/how-to-create-the-simplest-friendship-model-on-rails-de0ab51448ec
+
+

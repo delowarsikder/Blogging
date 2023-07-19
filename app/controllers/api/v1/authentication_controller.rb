@@ -3,7 +3,7 @@
 module Api
   module V1
     class AuthenticationController < ApplicationController
-      skip_before_action :authenticate_user, only: [:login]
+      skip_before_action :authenticate_user, only: %i[login]
       # Login user into application
       def login
         param = params[:user]
@@ -12,7 +12,7 @@ module Api
           if @user.confirm? # Check verify email address or not
             token = JsonWebTokenService.encode({ email: @user.email })
             time = Time.now + 1.hours
-            render json: { success: true, auth_token: token, token_expiration: time.strftime('%m-%d-%Y %H:%M:%S'), email: @user.email, user_id: @user.id },
+            render json: { success: true, auth_token: token, token_expiration: time.strftime('%m-%d-%Y %H:%M:%S'), user: @user },
                    status: :ok
           else
             render json: { error: 'Please verify email address' }, status: :unauthorized

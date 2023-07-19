@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # root to: 'api/v1/posts#index'
   namespace :api do
     namespace :v1 do
-      resources :posts
+      resources :posts, only: %i[index create show update destroy]
       resources :registrations, only: %i[create destory] do
         get :confirm_email, on: :collection
       end
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
         collection do
           post :login, to: 'authentication#login'
           get :logout, to: 'authentication#destroy'
-        end 
+        end
       end
       # post '/auth/login', to: 'authentication#login'
       # get '/auth/logout', to: 'authentication#destroy'
