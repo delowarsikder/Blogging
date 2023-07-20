@@ -33,6 +33,8 @@ module Api
         if user && user&.valid_confimation_token?
           user.token_confirmed!
           render json: { success: true, message: 'User confirmed successfully' }, status: :created
+        elsif user.confirm?
+          render json: { success: true, message: 'User already confirmed' }, status: :created
         else
           render json: { error: 'Invalid token' }, status: :not_found
         end
@@ -41,7 +43,7 @@ module Api
       private
 
       def user_params
-        params.require(:users).permit(:first_name, :last_name, :email, :password)
+        params.require(:user).permit(:first_name, :last_name, :email, :password)
       end
     end
   end

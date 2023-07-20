@@ -8,7 +8,6 @@ module Api
 
       # GET /api/v1/posts or /api/v1/posts.json
       def index
-        # byebug
         @posts = current_user.posts.all
         if @posts
           render json: @posts, status: :ok
@@ -37,7 +36,6 @@ module Api
       # POST /api/v1/posts or /api/v1/posts.json
       def create
         post = current_user.posts.new(post_params)
-        # byebug
         if post.save
           render json: { success: 'post successfully created' }, status: :ok
         else
