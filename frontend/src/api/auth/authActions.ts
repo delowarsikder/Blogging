@@ -7,7 +7,7 @@ export const createUserAsync = createAsyncThunk(
   async (payload: UserRegistrationFormData, { rejectWithValue }) => {
     try {
       const response = await createUser(payload);
-      console.log(response);
+      console.log("registration Data: ",response);
       return response;
     }
     catch (error: any) {
@@ -26,7 +26,7 @@ export const loginUserAsync = createAsyncThunk(
   async (payload: UserLoginFormData, { rejectWithValue }) => {
     try {
       const response = await loginUser(payload);
-      console.log(response);
+      console.log("login Data",response);
       return response;
     } catch (error: any) {
       // return custom error message from backend if present

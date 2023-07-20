@@ -11,12 +11,12 @@ export interface RegistrationData {
 }
 
 export interface UserRegistrationState {
-  users: RegistrationData[];
+  user: RegistrationData[];
   status: string;
 }
 
 export const initialState: UserRegistrationState = {
-  users: [
+  user: [
     {
       id: undefined,
       first_name: "",
