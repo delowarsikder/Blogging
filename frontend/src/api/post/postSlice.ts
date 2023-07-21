@@ -65,7 +65,6 @@ export const createPostAsync = createAsyncThunk(
 
     try {
       const response = await createPost(payload);
-      console.log(response);
       return response;
     }
     catch (e) {

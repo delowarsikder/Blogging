@@ -24,7 +24,7 @@ export async function createUser(payload: UserRegistrationFormData) {
 }
 
 export async function loginUser(payload: UserLoginFormData) {
-  const user = payload.userLoginInfo;
+  const user = payload.user;
   let valid = false;
   try {
     const response = await fetch(`${API_URL}/api/v1/auth/login`, {
@@ -33,10 +33,12 @@ export async function loginUser(payload: UserLoginFormData) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(user),
+      body: JSON.stringify({ user }),
     });
     var loginResult = await response.json();
+    console.log("responseData: ", response);
     valid = loginResult.success && loginResult.auth_token != null;
+
   } catch (except) {
     valid = false;
   }
@@ -58,10 +60,8 @@ export async function loginUser(payload: UserLoginFormData) {
   }
   setToken(loginResult.auth_token);
   setTokenExpiration(loginResult.token_expiration);
-  return {
-    valid: true,
-    auth_token: loginResult.auth_token,
-  };
+
+  return loginResult;
 
 }
 

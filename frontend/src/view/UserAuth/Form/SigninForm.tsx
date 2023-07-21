@@ -36,13 +36,18 @@ const SigninForm = () => {
   const dispatch = useDispatch<any>()
   const from = location.state?.from?.pathname || "/";
   const { loading, error, userInfo } = useSelector((state: any) => state.auth);
-
   const SigninSchema = Yup.object().shape({
     email: Yup.string()
       .email("Provide a valid email address")
       .required("Email is required"),
     password: Yup.string().required("Password is required"),
   });
+
+  useEffect(() => {
+    if (Object.keys(userInfo).length) {
+      navigate('/profile');
+    }
+  }, [navigate, userInfo])
 
   const formik = useFormik({
     initialValues: {
@@ -57,25 +62,17 @@ const SigninForm = () => {
       //call api to check the user login info then if valid
       setTimeout(() => {
         const formData = {
-          userLoginInfo: {
+          user: {
             email: loginInfo.email.toLowerCase(),
             password: loginInfo.password,
+            //call api to check the user login info then if valid
           }
         }
-        console.log("loginInfo: ", formData);
-        const response = dispatch(loginUserAsync(formData));
-        console.log("response: ",response)
-        
-        navigate(from, { replace: true });
+        dispatch(loginUserAsync(formData));
       }, 2000);
     },
   });
 
-  useEffect(() => {
-    if (Object.keys(userInfo).length) {
-      navigate('/');
-    }
-  }, [navigate, userInfo])
 
   const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
   return (

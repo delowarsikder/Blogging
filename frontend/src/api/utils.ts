@@ -15,9 +15,12 @@ export enum Statuses {
 
 
 export interface ITokenData {
-  user_id: number;
-  status: string;
-  timestamp: string;
+  user: {
+    user_id: number,
+    first_name: string,
+    last_name: string,
+    email: string,
+  }
 }
 
 export interface IGetTokenData {
@@ -26,12 +29,12 @@ export interface IGetTokenData {
 
 export function isTokenData(object: any): object is ITokenData {
   return (
-    object.user_id !== undefined &&
-    object.status !== undefined &&
-    object.timestamp !== undefined
+    object.user.user_id !== undefined &&
+    object.user.first_name !== undefined &&
+    object.user.last_name !== undefined &&
+    object.user.email !== undefined
   );
 }
-
 
 // localStorage key name for storing token
 const TOKEN = "auth_token";
@@ -44,7 +47,8 @@ export const setToken = (token: string) => {
 
 // read the jwt token on browser local storage
 export const getToken = () => {
-  return localStorage.getItem(TOKEN);
+  const token = localStorage.getItem(TOKEN);
+  return token ? token : null;
 };
 
 // remove the jwt token from browser local storage

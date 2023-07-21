@@ -1,12 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import produce from 'immer';
 import { RootState } from '../../app/store';
-import { Statuses } from '../utils';
+import { Statuses, getToken } from '../utils';
 import { createUserAsync, loginUserAsync } from './authActions';
-import { stat } from 'fs';
 
 // initialize userToken from local storage
-const userToken = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null;
+const userToken = getToken();
 
 const initialState = {
   loading: false,
@@ -29,13 +28,14 @@ const authSlice = createSlice({
       })
       .addCase(loginUserAsync.fulfilled, (state, { payload }: any) => {
         state.loading = false;
-        state.userInfo = payload;
         state.userToken = payload.userToken;
+        state.userInfo = payload.userInfo;
       })
       .addCase(loginUserAsync.rejected, (state, { payload }: any) => {
         state.loading = false;
         state.error = payload;
       })
+
       // create user 
       .addCase(createUserAsync.pending, (state) => {
         state.loading = true;
@@ -52,7 +52,9 @@ const authSlice = createSlice({
   }
 })
 
-export const { } = authSlice.actions;
+// export const { } = authSlice.actions;
+// export const selectUser = (state: RootState) => state;
 export default authSlice.reducer;
+
 
 

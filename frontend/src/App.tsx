@@ -15,24 +15,24 @@ import Signup from './view/UserAuth/Signup';
 import { useDispatch } from 'react-redux';
 import ForgetPassword from './view/UserAuth/ForgetPassword';
 import Layout from './view/Layout';
+import Profile from './view/Profile';
+import { getToken } from './api/utils';
 library.add(fab, fas)
 
 function App() {
-  const dispatch = useDispatch<any>();
-  const [auth, setAuth] = useState(false);
+  const token = getToken();
   return (
     <div>
       <Layout>
         <div className="App container">
           <Routes>
-            <Route path="/" element={<Posts />} />
-            <Route path="/error" element={<Error />} />
             <Route path='*' element={<Navigate to='/error' replace />} />
-            <Route path='/auth/signin' element={<Signin />} />
-            <Route path='/auth/signup' element={<Signup />} />
-            <Route path='/forget-password' element={<ForgetPassword />} />
+            <Route path='/auth/signin' element={!token && <Signin />} />
+            <Route path='/auth/signup' element={!token && <Signup />} />
+            {/* <Route path='/forget-password' element={<ForgetPassword />} /> */}
             <Route path='/aboutus' element={<AboutUs />} />
             <Route path='/*' element={<PrivateOutlet />}>
+              <Route path="/" element={<Posts />} />
               <Route path='postedit' element={<PostEdit />} />
               <Route path='newform' element={<NewForm />} />
             </Route>

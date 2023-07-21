@@ -88,11 +88,7 @@ const SignupForm = () => {
             password: userInfo.password,
           }
         }
-        console.log(formData);
         dispatch(createUserAsync(formData));
-
-        // setAuth(true);
-        // navigate("/", { replace: true });
       }, 2000);
     },
   });

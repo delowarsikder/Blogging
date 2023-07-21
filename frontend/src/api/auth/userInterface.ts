@@ -41,7 +41,7 @@ export interface UserRegistrationFormData {
 }
 
 export interface UserLoginFormData {
-  userLoginInfo: {
+  user: {
     email: string;
     password: string;
   }

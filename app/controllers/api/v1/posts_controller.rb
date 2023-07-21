@@ -37,7 +37,7 @@ module Api
       def create
         post = current_user.posts.new(post_params)
         if post.save
-          render json: { success: 'post successfully created' }, status: :ok
+          render json: { success: true, message: 'post successfully created' }, status: :ok
         else
           render json: { error: post.errors }, status: :not_found
         end

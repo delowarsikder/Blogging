@@ -6,6 +6,7 @@ import { createStyles, makeStyles } from '@mui/styles';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
+import { getToken } from '../../api/utils';
 
 
 const useStyles = makeStyles({
@@ -39,7 +40,7 @@ const useStyles = makeStyles({
 
 function Navbar() {
   const classes = useStyles();
-
+  const token = getToken();
   return (
     <AppBar position="sticky">
       <Toolbar>
@@ -57,8 +58,14 @@ function Navbar() {
             Thoughts
           </Typography>
         </Box>
-        <Button className={classes.button} href="/auth/signin">Login</Button>
-        <Button className={classes.button} component={Link} to={'/auth/signup'}>Create Account</Button>
+        {token ?
+          <Button className={classes.button} href="/auth/signin">Logout</Button>
+          :
+          <>
+            <Button className={classes.button} href="/auth/signin">Login</Button>
+            <Button className={classes.button} component={Link} to={'/auth/signup'}>Create Account</Button>
+          </>
+        }
       </Toolbar>
     </AppBar>
   );
