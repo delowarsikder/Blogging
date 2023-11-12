@@ -1,0 +1,65 @@
+ service nginx status
+ cd /etc/nginx/sites-enabled/
+ ls
+ cp default blogging
+ sudo cp default blogging
+ sudo  gedit blogging 
+ ls
+ rm -Rf blogging 
+ sudo rm -Rf blogging 
+ cd ../sites-available/
+ cp default blogging
+ sudo cp default blogging
+ sudo vi blogging 
+ sudo ln -s ./blogging ../sites-enabled/
+ sudo nginx -t
+ sudo vi /etc/nginx/nginx.conf
+ sudo nginx -t
+ sudo systemctl restart nginx
+ sudo nginx -t
+ sudo vi blogging 
+ sudo nginx -t
+ sudo vi blogging 
+ cd /var/www/html/
+ mkdir site1
+ sudo  mkdir site1
+ ls-al
+ ls -al
+ sudo chown -Rf www-data:www-data site1
+ cd site1/
+ touch inde.html
+ sudo touch inde.html
+ sudo touch index.html
+ vi index.html 
+ sudo vi index.html 
+ sudo nginx -t
+ sudo vi /etc/nginx/nginx.conf
+ sudo gedit /etc/nginx/nginx.conf
+ cat /etc/nginx/sites-enabled/blogging 
+ sudo ln -s /etc/nginx/sites-available/blogging /etc/nginx/sites-enabled/
+ rm -Rf /etc/nginx/sites-enabled/blogging 
+ sudo rm -Rf /etc/nginx/sites-enabled/blogging 
+ sudo ln -s /etc/nginx/sites-available/blogging /etc/nginx/sites-enabled/
+ sudo nginx -t
+ sudo service nginx restart
+ sudo gedit /etc/hosts
+ sudo ln -s /home/nascenia/delowar/blogging/frontend/build/* /var/www/html/site1/
+ sudo rm -Rf inde*
+ sudo ln -s /home/nascenia/delowar/blogging/frontend/build/* /var/www/html/site1/
+ sudo rm -Rf ./*
+ sudo ln -s /home/nascenia/delowar/blogging/frontend/build/* /var/www/html/site1/
+ cd /etc/nginx/sites-available/
+ ls
+ cat blogging 
+ sudo vi blogging 
+ sudo service nginx restart
+ sudo vi blogging 
+ sudo service nginx restart
+ sudo service nginx status
+ sudo vi blogging 
+ sudo service nginx status
+ sudo vi blogging 
+ sudo service nginx restart
+ sudo vi blogging 
+ sudo service nginx restart
+ history
